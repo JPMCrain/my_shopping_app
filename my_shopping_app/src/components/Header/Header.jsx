@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import styles from './index.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 class Header extends Component {
 	render() {
