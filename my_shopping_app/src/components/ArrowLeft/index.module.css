@@ -1,0 +1,10 @@
+.button {
+	border: none;
+	outline: none;
+	background-color: #1f5a72;
+	height: 50px;
+}
+
+.arrow {
+	font-size: 2em;
+}

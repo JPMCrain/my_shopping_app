@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import styles from './index.module.css';
 
 class ArrowRight extends Component {
 	render() {
 		return (
-			<button onClick={this.props.goToNextSlide}>
-				<FontAwesomeIcon icon={faAngleRight} />
+			<button className={styles.button} onClick={this.props.goToNextSlide}>
+				<FontAwesomeIcon icon={faChevronRight} className={styles.arrow} />
 			</button>
 		)
 	}
