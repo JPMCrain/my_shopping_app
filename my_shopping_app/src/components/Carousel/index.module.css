@@ -1,7 +1,6 @@
 .slideShow {
 	display: flex;
-	margin-top: 30px;
-	border: 1px solid black;
+	margin-top: 50px;
 	justify-content: center;
 	align-items: center;
 }

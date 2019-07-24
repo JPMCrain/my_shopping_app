@@ -21,7 +21,7 @@ class Carousel extends Component {
 
 	componentDidMount() {
 		this.getImages();
-		// this.timer();
+		this.timer();
 	}
 
 	getImages() {
@@ -83,7 +83,11 @@ class Carousel extends Component {
 			<div className={styles.slideShow} style={sliderStyle}>
 				<ArrowLeft goToPrevSlide={this.goToPrevSlide}></ArrowLeft>
 				{images.length > 0 &&
-					<Slide image={images[currentIndex].imagelink} />}
+					<Slide
+						name={images[currentIndex].name}
+						description={images[currentIndex].description}
+						price={images[currentIndex].price}
+						image={images[currentIndex].imagelink} />}
 				<ArrowRight goToNextSlide={this.goToNextSlide}></ArrowRight>
 			</div>
 		)
