@@ -7,7 +7,7 @@ class ArrowRight extends Component {
 	render() {
 		return (
 			<button className={styles.button} onClick={this.props.goToNextSlide}>
-				<FontAwesomeIcon icon={faChevronRight} className={styles.arrow} />
+				<FontAwesomeIcon icon={faChevronRight} />
 			</button>
 		)
 	}

@@ -1,11 +1,15 @@
 .button {
+	margin: 10px;
 	border: none;
 	outline: none;
-	background-color: #1f5a72;
+	background-color:#86c4b3;
 	height: 50px;
+	color: #e8d19d;
+	font-size: 3em;
 }
 
-.arrow {
-	font-size: 2em;
+.button:hover {
+	color: #782644;
 }
+
 

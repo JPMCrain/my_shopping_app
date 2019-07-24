@@ -21,29 +21,30 @@ class Carousel extends Component {
 
 	componentDidMount() {
 		this.getImages();
-		this.timer();
+		// this.timer();
 	}
 
 	getImages() {
 		let itemDataArray = jsonData;
-		let allimages = [];
-		let randomFiveImages = [];
+		let allItems = [];
+		let randomFiveItems = [];
 		itemDataArray.forEach((dataItem) => {
 			let subcategoriesArray = dataItem.subcategories;
 			subcategoriesArray.forEach((subItem) => {
 				let itemArray = subItem.items;
-				itemArray.forEach((image) => {
-					allimages.push(image.imagelink);
+				itemArray.forEach((item) => {
+					allItems.push(item);
 				});
 			});
 		});
-		for (let i = 0; i < allimages.length; i++) {
-			let randomImage = allimages[Math.floor(Math.random() * allimages.length)];
-			if (randomFiveImages.length < 5) {
-				randomFiveImages.push(randomImage);
+		for (let i = 0; i < allItems.length; i++) {
+			let randomImage = allItems[Math.floor(Math.random() * allItems.length)];
+			if (randomFiveItems.length < 5) {
+				randomFiveItems.push(randomImage);
 			}
 		}
-		this.setState({ images: randomFiveImages });
+		console.log(randomFiveItems)
+		this.setState({ images: randomFiveItems });
 	}
 
 	timer() {
@@ -77,11 +78,12 @@ class Carousel extends Component {
 			transform: `translateX(${this.state.activeIndex * - 100}%)`,
 			transition: '0.2s'
 		}
-
+		let { currentIndex, images } = this.state
 		return (
 			<div className={styles.slideShow} style={sliderStyle}>
 				<ArrowLeft goToPrevSlide={this.goToPrevSlide}></ArrowLeft>
-				<Slide image={this.state.images[this.state.currentIndex]} />
+				{images.length > 0 &&
+					<Slide image={images[currentIndex].imagelink} />}
 				<ArrowRight goToNextSlide={this.goToNextSlide}></ArrowRight>
 			</div>
 		)
