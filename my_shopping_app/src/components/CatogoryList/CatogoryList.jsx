@@ -8,14 +8,19 @@ class CatogoryList extends Component {
 		super(props)
 		this.state = {
 			catogoryLists: jsonData,
-			openIndex: null,
+			openIndex: null
 		}
-		this.toggleList = this.toggleList.bind(this);
+		this.onCategorytItemClick = this.onCategorytItemClick.bind(this);
 	}
 
 	toggleList(e, index) {
 		e.target.style.color = '#86c4b3';
 		this.setState({ openIndex: index })
+	}
+
+	onCategorytItemClick = (catogoryIndex, index) => {
+		const category = jsonData[catogoryIndex].subcategories[index];
+		this.props.onCategorytItemClick(category);
 	}
 
 	render() {
@@ -42,7 +47,11 @@ class CatogoryList extends Component {
 													return (
 														<li
 															className={styles.sublistItem}
-															key={index}>
+															key={index}
+															onClick={(e) => {
+																this.onCategorytItemClick(catogoryIndex, index)
+															}}
+														>
 															{item.name}
 														</li>
 													);
