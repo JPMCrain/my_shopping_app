@@ -4,3 +4,19 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
+.midWrapper {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.listWrapper {
+	flex-grow: 0;
+	background-color: #782644;
+	height: 100%;
+}
+
+.itemsWrapper {
+	flex-grow: 3;
+	height: 100%;
+}

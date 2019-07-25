@@ -1,0 +1,27 @@
+.listWrapper {
+	width: 250px;
+	color: #e8d19d;
+}
+
+ul {
+	margin-top: -10px;
+	padding: 0;
+	padding-left: 10px;
+}
+
+li {
+	cursor: pointer;
+	list-style-type: none;
+}
+
+.catlistItem:hover {
+	color: #86c4b3;
+}
+
+.catlistItemActive {
+	color: #86c4b3;
+}
+
+.sublistItem:hover  {
+	color: #86c4b3;
+}
