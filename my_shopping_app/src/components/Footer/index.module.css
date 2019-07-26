@@ -6,4 +6,5 @@
 	justify-content: space-around;
 	background-color: #18202c;
 	border-top: 10px solid #782644;
+	z-index: 2;
 }

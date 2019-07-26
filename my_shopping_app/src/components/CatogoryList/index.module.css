@@ -4,7 +4,6 @@
 }
 
 ul {
-	margin-top: -10px;
 	padding: 0;
 	padding-left: 10px;
 }
@@ -12,6 +11,11 @@ ul {
 li {
 	cursor: pointer;
 	list-style-type: none;
+}
+
+.catlistItem {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .catlistItem:hover {

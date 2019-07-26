@@ -1,24 +1,36 @@
 .itemWrapper {
+	font-size: 0.8em;
+	margin: 20px;
 	width: 150px;
-	height: 250px;
+	height: 260px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
 	background-color: #e8d19d;
 	border-radius: 20px;
+	border: 2px solid #782644;
 }
 
 .itemImage {
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
 	width: 150px;
-	height: 150px;
+	height: 120px;
+	background-color: snow;
 }
 
 .itemName {
+	color: #1f5a72;
+	width: 90%;
+	height: 40px;
 	text-align: center;
-	padding: 10px;
+	padding: 5px;
+	border-bottom: 2px dashed #782644;
 }
 
 h4 {
+	padding: 0;
 	margin: 0;
 }
 
@@ -33,8 +45,16 @@ h4 {
 }
 
 .itemAddToCart {
+	align-self: flex-end;
 	width: 60px;
 	height: 60px;
 	border-radius: 60px;
 	font-size: 10px;
+}
+
+.itemPrice {
+	width: 90%;
+	color: #782644;
+	font-size: 1.2em;
+	justify-self: flex-start;
 }

@@ -7,14 +7,14 @@ class ItemCard extends Component {
 	render() {
 		return (
 			<div className={styles.itemWrapper}>
-				<div className={styles.itemImage}>
-					<img src="" alt="" />
+				<div >
+					<img className={styles.itemImage} src={this.props.image} alt="" />
 				</div>
 				<div className={styles.itemName}>
-					<h4>sugar and spice</h4>
+					<h4>{this.props.name}</h4>
 				</div>
 				<div className={styles.itemPrice}>
-					<h4>$ 5.99</h4>
+					<h4>$ {this.props.price}</h4>
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>

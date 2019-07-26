@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header.jsx';
 
 import Footer from '../../components/Footer/Footer.jsx';
 import CatogoryList from '../../components/CatogoryList/CatogoryList';
-import ShopListCards from '../../components/ShopListCards/ShopListCards';
+import AddShopListCards from '../../components/AddShopListCards/AddShopListCards';
 
 class ShopPage extends Component {
 	constructor(props) {
@@ -29,10 +29,11 @@ class ShopPage extends Component {
 						<CatogoryList onCategorytItemClick={this.onCategorytItemClick} />
 					</div>
 					<div className={styles.itemsWrapper}>
-						<ShopListCards recievedItem={this.state.selectedList} />
+						<div>
+							<AddShopListCards recievedItems={this.state.selectedList} />
+						</div>
 					</div>
 				</div>
-
 				<Footer />
 			</div>
 		)
