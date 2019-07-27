@@ -1,0 +1,53 @@
+.cardsTopBar {
+	display: flex;
+	justify-content: space-between;
+	line-height: 50px;
+	padding-left: 20px;
+	font-size: 1.2em;
+	height: 50px;
+	color: #782644;
+}
+
+.sortButtonsWrapper {
+	display: flex;
+	width: 600px;
+	justify-content: flex-end;
+	align-items: center;
+	margin-right: 10px;
+}
+
+
+.input {
+	width: 50px;
+	padding-left: 10px; 
+	align-self: flex-end;
+	margin-bottom: 15px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #782644;
+	color: #782644;
+}
+
+.input:hover {
+	border-bottom: 2px solid #782644;
+}
+
+.inputLabel {
+	font-size: 0.8em;
+}
+
+.sortButton {
+	margin: 5px;
+	border-radius: 20px;
+	width: 80px;
+	height: 40px;
+	border: none;
+	outline: none;
+	background-color: #18202C;
+	color: #86c4b3;
+}
+
+.sortButton:hover {
+	background-color: #86c4b3;
+	color: #18202C;
+}

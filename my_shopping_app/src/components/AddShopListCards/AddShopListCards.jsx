@@ -1,33 +1,76 @@
 import React, { Component } from 'react'
 import styles from './index.module.css';
 import ItemCard from '../ItemCard/ItemCard';
+import cloneDeep from 'lodash/cloneDeep';
 
-export class AddShopListCards extends Component {
 
+class AddShopListCards extends Component {
+
+	constructor(props) {
+		super(props)
+		console.log(props)
+		this.state = {
+			originalItems: props.recievedItems,
+			filteredItems: {},
+			isFiltered: false
+		}
+		// this.onClickSortByPrice = this.onClickSortByPrice.bind(this);
+	}
+
+	componentWillReceiveProps(newProps) {
+		this.setState({
+			originalItems: newProps.recievedItems,
+		})
+	}
+
+	sortByPrice() {
+		const { originalItems, isFiltered } = this.state;
+		const sortedItems = cloneDeep(originalItems);
+		if (isFiltered === false) {
+			sortedItems.items.sort(function (a, b) {
+				return parseFloat(b.price) - parseFloat(a.price);
+			});
+			this.setState({
+				filteredItems: sortedItems,
+				isFiltered: true
+			});
+		} else {
+			this.setState({
+				isFiltered: false
+			});
+		}
+	}
+
+	// onClickSortByPrice() {
+	// 	this.sortByPrice()
+	// }
 
 	render() {
+		const { originalItems } = this.state;
 
-		const list = this.props.recievedItems;
-
+		console.log(this.state.filteredItems)
 		return (
-			<div className={styles.Wrapper}>
-				<div className={styles.cardsTopBar} >
-					<h4>{list.name}</h4>
-				</div>
-				<div className={styles.cardsWrapper}>
-					{list.items !== undefined &&
-						list.items.map((item, index) => {
-							return (
-								<ItemCard
-									key={index}
-									image={item.imagelink}
-									name={item.name}
-									price={item.price}
-								/>
-							)
-						})
-					}
-				</div>
+			<div>
+				{
+					originalItems.items !== undefined &&
+					<div className={styles.Wrapper}>
+
+						<div className={styles.cardsWrapper}>
+							{
+								originalItems.items.map((item, index) => {
+									return (
+										<ItemCard
+											key={index}
+											image={item.imagelink}
+											name={item.name}
+											price={item.price}
+										/>
+									)
+								})
+							}
+						</div>
+					</div>
+				}
 			</div>
 		)
 	}

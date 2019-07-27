@@ -5,6 +5,7 @@ import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import CatogoryList from '../../components/CatogoryList/CatogoryList';
 import AddShopListCards from '../../components/AddShopListCards/AddShopListCards';
+import ShopListHeader from '../../components/ShopListHeader/ShopListHeader';
 
 class ShopPage extends Component {
 	constructor(props) {
@@ -30,6 +31,7 @@ class ShopPage extends Component {
 					</div>
 					<div className={styles.itemsWrapper}>
 						<div>
+							<ShopListHeader recievedItems={this.state.selectedList} />
 							<AddShopListCards recievedItems={this.state.selectedList} />
 						</div>
 					</div>
