@@ -19,6 +19,8 @@ class ShopPage extends Component {
 				sortByPrice: false,
 				filterByPrice: false,
 				filterByStock: false,
+				min: undefined,
+				max: undefined,
 			}
 		}
 
@@ -28,12 +30,19 @@ class ShopPage extends Component {
 	}
 
 	onCategorytItemClick = (selectedCategory) => {
-		this.setState({ selectedCategory, filteredCategory: selectedCategory });
+		const { filters } = this.state;
+		const filteredCategory = this.filterCategoryItems(selectedCategory, filters)
+		this.setState({ selectedCategory, filteredCategory });
 	}
 
 	onFilterChange(filters) {
 		const { selectedCategory } = this.state;
-		const filteredCategory = cloneDeep(selectedCategory);
+		const filteredCategory = this.filterCategoryItems(selectedCategory, filters)
+		this.setState({ filters, filteredCategory });
+	}
+
+	filterCategoryItems(category, filters) {
+		const filteredCategory = cloneDeep(category);
 
 		if (filters.sortByPrice) {
 			this.sortByPrice(filteredCategory)
@@ -43,7 +52,11 @@ class ShopPage extends Component {
 			this.filterByStock(filteredCategory)
 		}
 
-		this.setState({ filters, filteredCategory });
+		if (filters.filterByPrice) {
+			this.filterByPrice(filteredCategory)
+		}
+
+		return filteredCategory;
 	}
 
 	sortByPrice(filteredCategory) {
@@ -59,8 +72,22 @@ class ShopPage extends Component {
 		filteredCategory.items = newfilteredCategory;
 	}
 
+	filterByPrice(filteredCategory) {
+		const { filters } = this.state;
+		const expectedMin = filters.min || 0
+		let newfilteredCategory = filteredCategory.items.filter((item) => {
+			const expectedMax = filters.max || item.price
+			const min = Math.min(expectedMin, expectedMax);
+			const max = Math.max(expectedMin, expectedMax);
+			return item.price >= min && item.price <= max
+		});
+		filteredCategory.items = newfilteredCategory;
+	}
+
 	render() {
+
 		const { filteredCategory, filters } = this.state;
+
 		return (
 			<div className={styles.Wrapper}>
 				<Header />

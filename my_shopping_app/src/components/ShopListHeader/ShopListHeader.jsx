@@ -13,8 +13,16 @@ class SortButtonsTab extends Component {
 		return filtered ? styles.sortButtonSelected : styles.sortButton;
 	}
 
+	handleMinMaxValueChange(e) {
+		let { filters } = this.props;
+		const filterKey = e.target.name;
+		filters[filterKey] = e.target.value;
+		this.props.onFilterChange(filters);
+	}
+
 	render() {
 		const { title, filters } = this.props;
+
 		return (
 
 			<div>
@@ -23,9 +31,21 @@ class SortButtonsTab extends Component {
 						<h4>{title}</h4>
 						<div className={styles.sortButtonsWrapper}>
 							<p className={styles.inputLabel}>min&#58;</p>
-							<input className={styles.input} min="0" step=".1" type='number' />
+							<input
+								className={styles.input}
+								min="0"
+								step='0.1'
+								type='number'
+								name='min'
+								onChange={this.handleMinMaxValueChange.bind(this)} />
+
 							<p className={styles.inputLabel}>max&#58;</p>
-							<input className={styles.input} min="0" step=".1" type='number' />
+							<input
+								className={styles.input}
+								min="0"
+								type='number'
+								name='max'
+								onChange={this.handleMinMaxValueChange.bind(this)} />
 
 							<button
 								onClick={this.onClickFilter.bind(this, "filterByPrice")}
