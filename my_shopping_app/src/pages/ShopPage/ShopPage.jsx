@@ -39,6 +39,10 @@ class ShopPage extends Component {
 			this.sortByPrice(filteredCategory)
 		}
 
+		if (filters.filterByStock) {
+			this.filterByStock(filteredCategory)
+		}
+
 		this.setState({ filters, filteredCategory });
 	}
 
@@ -48,9 +52,12 @@ class ShopPage extends Component {
 		});
 	}
 
-	// onClickSortByPrice() {
-	// 	this.sortByPrice()
-	// }
+	filterByStock(filteredCategory) {
+		let newfilteredCategory = filteredCategory.items.filter((item) => {
+			return item.stock > 0;
+		});
+		filteredCategory.items = newfilteredCategory;
+	}
 
 	render() {
 		const { filteredCategory, filters } = this.state;
