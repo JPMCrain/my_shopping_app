@@ -18,6 +18,13 @@ class CatogoryList extends Component {
 		this.setState({ openIndex: index })
 	}
 
+	onClickFilter(filterKey, index) {
+		let { filters } = this.props;
+		filters[filterKey] = !filters[filterKey];
+		filters.itemKey = index;
+		this.props.onFilterChange(filters);
+	}
+
 	onCategorytItemClick = (catogoryIndex, index) => {
 		const category = jsonData[catogoryIndex].subcategories[index];
 		this.props.onCategorytItemClick(category);
@@ -25,6 +32,7 @@ class CatogoryList extends Component {
 
 	render() {
 		const { catogoryLists } = this.state;
+		const { filters } = this.props;
 		return (
 			<div className={styles.listWrapper}>
 				<ul>
@@ -49,7 +57,12 @@ class CatogoryList extends Component {
 															className={styles.sublistItem}
 															key={index}
 															onClick={(e) => {
-																this.onCategorytItemClick(catogoryIndex, index)
+																if (filters.isItemViewPannelOpen) {
+																	this.onClickFilter('isItemViewPannelOpen', undefined)
+																	this.onCategorytItemClick(catogoryIndex, index)
+																} else {
+																	this.onCategorytItemClick(catogoryIndex, index)
+																}
 															}}
 														>
 															{item.name}

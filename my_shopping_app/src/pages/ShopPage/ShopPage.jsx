@@ -95,7 +95,11 @@ class ShopPage extends Component {
 				<Header />
 				<div className={styles.midWrapper}>
 					<div className={styles.listWrapper}>
-						<CatogoryList onCategorytItemClick={this.onCategorytItemClick} />
+						<CatogoryList
+							filters={filters}
+							onFilterChange={this.onFilterChange}
+							onCategorytItemClick={this.onCategorytItemClick}
+						/>
 					</div>
 					<div className={styles.itemsWrapper}>
 						{filteredCategory &&
