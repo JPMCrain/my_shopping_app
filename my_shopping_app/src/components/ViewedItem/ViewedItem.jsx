@@ -4,7 +4,7 @@ import AddToCart from '../AddToCart/AddToCart';
 
 function ViewedItem(props) {
 	return (
-		<div className={styles.viewedItem__wrapper}>
+		<div onClick={props.onItemClick} className={styles.viewedItem__wrapper}>
 			<div className={styles.viewedItem__section1} >
 				<img className={styles.viewedItem__image} src={props.image} alt="" />
 			</div>
@@ -15,7 +15,7 @@ function ViewedItem(props) {
 							<h2>{props.name}</h2>
 						</div>
 					</div>
-					<button onClick={props.onClick} className={styles.exitButton}>X</button>
+					<button onClick={props.onItemClick} className={styles.exitButton}>X</button>
 				</div>
 				<div className={styles.viewedItem__description}>
 					<p>Rating: {props.rating}stars</p>

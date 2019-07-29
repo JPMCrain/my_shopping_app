@@ -24,7 +24,7 @@ class AddShopListCards extends Component {
 				{
 					category && category.items &&
 					<div className={styles.Wrapper}>
-						{filters && filters.isItemViewPannelOpen &&
+						{filters && filters.isItemViewPannelOpen && selectedItem &&
 							<div className={viewSelectedClass}>
 								<ViewedItem
 									image={selectedItem.imagelink}
@@ -33,7 +33,7 @@ class AddShopListCards extends Component {
 									description={selectedItem.description}
 									rating={selectedItem.rating}
 									stock={selectedItem.stock}
-									onClick={() => { this.onClickFilter('isItemViewPannelOpen', undefined) }}
+									onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', undefined) }}
 								/>
 							</div>
 						}
@@ -46,7 +46,7 @@ class AddShopListCards extends Component {
 											image={item.imagelink}
 											name={item.name}
 											price={item.price}
-											onClick={() => { this.onClickFilter('isItemViewPannelOpen', index) }}
+											onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', index) }}
 										/>
 									)
 								})

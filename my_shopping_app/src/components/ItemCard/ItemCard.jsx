@@ -6,7 +6,7 @@ import AddToCart from '../AddToCart/AddToCart';
 class ItemCard extends Component {
 	render() {
 		return (
-			<div className={styles.itemWrapper}>
+			<div onClick={this.props.onItemClick} className={styles.itemWrapper}>
 				<div >
 					<img className={styles.itemImage} src={this.props.image} alt="" />
 				</div>
@@ -15,7 +15,6 @@ class ItemCard extends Component {
 				</div>
 				<div className={styles.itemPrice}>
 					<h4>$ {this.props.price}</h4>
-					<button onClick={this.props.onClick} className={styles.viewItem}>View</button>
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>
