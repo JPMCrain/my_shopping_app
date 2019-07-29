@@ -15,6 +15,7 @@ class ItemCard extends Component {
 				</div>
 				<div className={styles.itemPrice}>
 					<h4>$ {this.props.price}</h4>
+					<button onClick={this.props.onClick} className={styles.viewItem}>View</button>
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>

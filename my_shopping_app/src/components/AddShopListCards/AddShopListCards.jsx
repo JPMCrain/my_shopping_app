@@ -1,32 +1,62 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styles from './index.module.css';
 import ItemCard from '../ItemCard/ItemCard';
+import ViewedItem from '../ViewedItem/ViewedItem';
 
-function AddShopListCards({ category }) {
 
-	return (
-		<div>
-			{
-				category && category.items &&
-				<div className={styles.Wrapper}>
-					<div className={styles.cardsWrapper}>
-						{
-							category.items.map((item, index) => {
-								return (
-									<ItemCard
-										key={index}
-										image={item.imagelink}
-										name={item.name}
-										price={item.price}
-									/>
-								)
-							})
+
+class AddShopListCards extends Component {
+
+	onClickFilter(filterKey, index) {
+		let { filters } = this.props;
+		filters[filterKey] = !filters[filterKey];
+		filters.itemKey = index;
+		this.props.onFilterChange(filters);
+	}
+
+	render() {
+		const { category, filters } = this.props;
+		const selectedItem = category.items[filters.itemKey];
+		const viewSelectedClass = filters.isItemViewPannelOpen ? styles.viewSelectedItemActive : styles.viewSelectedItem;
+		console.log(filters);
+		return (
+			<div>
+				{
+					category && category.items &&
+					<div className={styles.Wrapper}>
+						{filters && filters.isItemViewPannelOpen &&
+							<div className={viewSelectedClass}>
+								<ViewedItem
+									image={selectedItem.imagelink}
+									name={selectedItem.name}
+									price={selectedItem.price}
+									description={selectedItem.description}
+									rating={selectedItem.rating}
+									stock={selectedItem.stock}
+									onClick={() => { this.onClickFilter('isItemViewPannelOpen', undefined) }}
+								/>
+							</div>
 						}
+						<div className={styles.cardsWrapper}>
+							{
+								category.items.map((item, index) => {
+									return (
+										<ItemCard
+											key={index}
+											image={item.imagelink}
+											name={item.name}
+											price={item.price}
+											onClick={() => { this.onClickFilter('isItemViewPannelOpen', index) }}
+										/>
+									)
+								})
+							}
+						</div>
 					</div>
-				</div>
-			}
-		</div>
-	)
+				}
+			</div>
+		)
+	}
 }
 
 export default AddShopListCards

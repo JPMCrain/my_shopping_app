@@ -5,3 +5,17 @@
 	overflow-y: auto;
 	z-index: 1;
 }
+
+.viewSelectedItem {
+	margin: 0;
+	height: 0;
+}
+
+.viewSelectedItemActive {
+	margin: 0;
+	background-color: snow;
+	position: absolute;
+	width: 81.5%;
+	height: 465px;
+	z-index: 4;
+}

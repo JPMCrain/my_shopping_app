@@ -53,8 +53,24 @@ h4 {
 }
 
 .itemPrice {
+	display: flex;
+	justify-content: space-between;
 	width: 90%;
 	color: #782644;
 	font-size: 1.2em;
 	justify-self: flex-start;
+}
+
+.viewItem {
+	margin-right: 8px;
+	border-radius: 10px;
+	border: none;
+	outline: none;
+	background-color: #782644;
+	color: #86c4b3;
+	opacity: 0.7;
+}
+
+.viewItem:hover {
+	opacity: 1;
 }

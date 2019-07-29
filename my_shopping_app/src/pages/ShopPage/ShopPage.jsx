@@ -19,6 +19,8 @@ class ShopPage extends Component {
 				sortByPrice: false,
 				filterByPrice: false,
 				filterByStock: false,
+				isItemViewPannelOpen: false,
+				itemKey: undefined,
 				min: undefined,
 				max: undefined,
 			}
@@ -103,7 +105,10 @@ class ShopPage extends Component {
 									filters={filters}
 									onFilterChange={this.onFilterChange}
 								/>
-								<AddShopListCards category={filteredCategory} />
+								<AddShopListCards
+									category={filteredCategory}
+									filters={filters}
+									onFilterChange={this.onFilterChange} />
 							</div>
 						}
 					</div>

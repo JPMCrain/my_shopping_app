@@ -61,3 +61,11 @@
 	background-color: #86c4b3;
 	color: #18202C;
 }
+
+.viewButton {
+	display: none;
+}
+
+.viewButtonActive {
+	display: block;
+}
