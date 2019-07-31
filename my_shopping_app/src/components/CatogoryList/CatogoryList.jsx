@@ -14,7 +14,6 @@ class CatogoryList extends Component {
 	}
 
 	toggleList(e, index) {
-		e.target.style.color = '#86c4b3';
 		this.setState({ openIndex: index })
 	}
 

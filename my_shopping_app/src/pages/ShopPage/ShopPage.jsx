@@ -86,10 +86,11 @@ class ShopPage extends Component {
 		filteredCategory.items = newfilteredCategory;
 	}
 
+
+
 	render() {
 
 		const { filteredCategory, filters } = this.state;
-
 		return (
 			<div className={styles.Wrapper}>
 				<Header />

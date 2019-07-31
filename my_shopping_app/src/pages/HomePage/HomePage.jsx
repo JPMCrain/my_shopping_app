@@ -5,11 +5,16 @@ import Carousel from '../../components/Carousel/Carousel.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 
 class HomePage extends Component {
+
 	render() {
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
-				<Carousel />
+				<Carousel
+					itemList={this.props.itemState}
+					goToPrevSlide={this.props.goToPrevSlide}
+					goToNextSlide={this.props.goToNextSlide}
+				/>
 				<Footer />
 			</div>
 		)
