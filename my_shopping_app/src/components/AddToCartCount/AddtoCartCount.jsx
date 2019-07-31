@@ -12,12 +12,12 @@ class AddtoCartCount extends Component {
 					<input className={styles.input} type="numer" min='1' />
 				</div>
 				<div className={styles.button__wrapper}>
-					<button onClick={this.onClickUp} className={styles.input__button}>
+					<button className={styles.input__button}>
 						<div className={styles.icon}>
 							<FontAwesomeIcon icon={faChevronUp} />
 						</div>
 					</button>
-					<button onClick={this.onClickDown} className={styles.input__button}>
+					<button className={styles.input__button}>
 						<div className={styles.icon}>
 							<FontAwesomeIcon icon={faChevronDown} />
 						</div>

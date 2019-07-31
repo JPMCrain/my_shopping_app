@@ -38,6 +38,7 @@ h4 {
 	width: 150px;
 	display: flex;
 	justify-content: space-evenly;
+	align-items: center;
 }
 
 .itemQuantity {

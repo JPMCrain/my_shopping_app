@@ -1,0 +1,8 @@
+.Wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.midWrapper {
+	height: 520px;
+}

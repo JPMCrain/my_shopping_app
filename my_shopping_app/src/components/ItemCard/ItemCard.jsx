@@ -19,7 +19,7 @@ class ItemCard extends Component {
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>
-						<AddtoCartCount />>
+						<AddtoCartCount />
 					</div>
 					<div className={styles.itemAddToCart}>
 						<AddToCart />

@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css'
+import CheckOutPage from './pages/CheckOutPage/CheckOutPage';
 
-import HomePage from './pages/HomePage/HomePage';
+// import HomePage from './pages/HomePage/HomePage';
 // import ShopPage from './pages/ShopPage/ShopPage';
 
 
@@ -9,8 +10,9 @@ import HomePage from './pages/HomePage/HomePage';
 function App() {
   return (
     <div className="App">
-      <HomePage/>
+      {/* <HomePage/> */}
       {/* <ShopPage/> */}
+      <CheckOutPage/>
     </div>
   );
 }
