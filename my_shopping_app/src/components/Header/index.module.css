@@ -24,16 +24,41 @@
 	height: 80px;
 }
 
-.fontAwesomeIcon {
-	margin: 10px;
-	color: #86c4b3;
-	font-size: 1.5em;
-}
 
-.goToShopTab {
+.goTab {
 	border: none;
 	outline: none;
 	font-size: 1.2em;
+	padding: 5px;
+	margin-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 20px;
 	background-color: #18202c;
 	color: #86c4b3;
+}
+
+.goTab:hover {
+	color: #782644;
+	background-color: #86c4b3;
+}
+
+.goToCartTab {
+	border: none;
+	outline: none;
+	display: flex;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	text-align: center;
+	color: #86c4b3;
+	font-size: 1.8em;
+	margin-right: 5px;
+	background-color: #18202c;
+}
+
+.goToCartTab:hover {
+	color: #782644;
+	background-color: #86c4b3;
 }
