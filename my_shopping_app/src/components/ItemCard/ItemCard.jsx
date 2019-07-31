@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.module.css';
 
 import AddToCart from '../AddToCart/AddToCart';
+import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 
 class ItemCard extends Component {
 	render() {
@@ -18,7 +19,7 @@ class ItemCard extends Component {
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>
-
+						<AddtoCartCount />>
 					</div>
 					<div className={styles.itemAddToCart}>
 						<AddToCart />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './index.module.css';
 import AddToCart from '../AddToCart/AddToCart';
+import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 
 class Slide extends Component {
 	render() {
@@ -17,7 +18,11 @@ class Slide extends Component {
 						<p>{this.props.description}</p>
 					</div>
 					<p className={styles.price}>${this.props.price}</p>
-					<AddToCart />
+					<div className={styles.AddtoCart__wrapper}>
+						<div className={styles.AddtoCartCount}><AddtoCartCount /></div>
+						<div className={styles.AddtoCart}><AddToCart /></div>
+					</div>
+
 				</div>
 			</div>
 

@@ -1,0 +1,56 @@
+
+div input[type="number"]::-webkit-outer-spin-button, 
+div input[type="number"]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.wrapper {
+	display: flex;
+	width: 70px;
+	border: 2px solid #782644;
+	border-radius: 5px;
+}
+
+.input {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	padding-left: 10px; 
+	width: 30px;
+	height: 28px;
+	font-size: 1.2em;
+	outline: none;
+	border: none;
+	color:	#782644;
+	background-color:#e8d19d;
+}
+
+.button__wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.input__button {
+	border: none;
+	outline: none;
+	display: flex;
+	background-color:#782644;
+	color:	#e8d19d;
+	justify-content: center;
+	align-content: center;
+	align-items: baseline;
+	width: 30px;
+	height: 15px;
+	font-size: 0.7em;
+	opacity: 0.5;
+}
+
+.input__button:hover {
+	opacity: 1;
+}
+
+.icon {
+	margin: 0;
+	padding: 0;
+}
