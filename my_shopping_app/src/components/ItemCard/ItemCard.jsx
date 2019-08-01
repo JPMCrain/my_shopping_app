@@ -19,10 +19,18 @@ class ItemCard extends Component {
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>
-						<AddtoCartCount />
+						<AddtoCartCount
+							addToCart={this.props.addToCart}
+							handleOnChange={this.handleOnChange}
+							increaseCount={this.props.increaseCount}
+							decreaseCount={this.props.decreaseCount} />
 					</div>
 					<div className={styles.itemAddToCart}>
-						<AddToCart />
+						<AddToCart
+							addToCart={this.props.addToCart}
+							handleOnChange={this.handleOnChange}
+							increaseCount={this.props.increaseCount}
+							decreaseCount={this.props.decreaseCount} />
 					</div>
 				</div>
 

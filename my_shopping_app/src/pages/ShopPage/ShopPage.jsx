@@ -23,6 +23,13 @@ class ShopPage extends Component {
 				itemKey: undefined,
 				min: undefined,
 				max: undefined,
+			},
+			addToCart: {
+				cart: {
+					id: 1,
+					items: {},
+					count: 1
+				}
 			}
 		}
 
@@ -85,12 +92,46 @@ class ShopPage extends Component {
 		});
 		filteredCategory.items = newfilteredCategory;
 	}
+	handleOnChange() {
 
+	}
 
+	increaseCount() {
+		let count = this.state.addToCart.cart.count
+		count++
+		let newCount = count
+		this.setState({
+			addToCart: {
+				cart: {
+					id: 1,
+					items: {},
+					count: newCount
+				}
+			}
+		});
+	}
+
+	decreaseCount() {
+		let count = this.state.addToCart.cart.count
+		if (count === 1) {
+			return
+		}
+		let newCount = count - 1
+		this.setState({
+			addToCart: {
+				cart: {
+					id: 1,
+					items: {},
+					count: newCount
+				}
+			}
+		});
+	}
 
 	render() {
 
 		const { filteredCategory, filters } = this.state;
+
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
@@ -113,7 +154,11 @@ class ShopPage extends Component {
 								<AddShopListCards
 									category={filteredCategory}
 									filters={filters}
-									onFilterChange={this.onFilterChange} />
+									onFilterChange={this.onFilterChange}
+									addToCart={this.state.addToCart}
+									handleOnChange={this.handleOnChange}
+									increaseCount={this.increaseCount.bind(this)}
+									decreaseCount={this.decreaseCount.bind(this)} />
 							</div>
 						}
 					</div>

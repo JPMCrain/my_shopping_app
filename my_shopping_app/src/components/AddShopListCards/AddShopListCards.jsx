@@ -18,7 +18,7 @@ class AddShopListCards extends Component {
 		const { category, filters } = this.props;
 		const selectedItem = category.items[filters.itemKey];
 		const viewSelectedClass = filters.isItemViewPannelOpen ? styles.viewSelectedItemActive : styles.viewSelectedItem;
-		console.log(filters);
+		console.log(this.props);
 		return (
 			<div>
 				{
@@ -34,6 +34,11 @@ class AddShopListCards extends Component {
 									rating={selectedItem.rating}
 									stock={selectedItem.stock}
 									onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', undefined) }}
+
+									addToCart={this.props.addToCart}
+									handleOnChange={this.handleOnChange}
+									increaseCount={this.props.increaseCount}
+									decreaseCount={this.props.decreaseCount}
 								/>
 							</div>
 						}
@@ -47,6 +52,11 @@ class AddShopListCards extends Component {
 											name={item.name}
 											price={item.price}
 											onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', index) }}
+
+											addToCart={this.props.addToCart}
+											handleOnChange={this.handleOnChange}
+											increaseCount={this.props.increaseCount}
+											decreaseCount={this.props.decreaseCount}
 										/>
 									)
 								})

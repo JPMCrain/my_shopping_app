@@ -16,14 +16,23 @@ class App extends Component {
 		this.state = {
 			itemList: [],
 			currentIndex: 0,
+			addToCart: {
+				cart: {
+					id: 1,
+					items: {},
+					count: 1
+				},
+			}
     }
     
 		this.goToNextSlide = this.goToNextSlide.bind(this);
 		this.goToPrevSlide = this.goToPrevSlide.bind(this);
+		this.handleOnChange = this.handleOnChange.bind(this);
 	}
 
 	componentDidMount() {
 		this.getItems();
+		this.handleOnChange();
 	}
 
 	getItems() {
@@ -49,7 +58,7 @@ class App extends Component {
 	}
 
   goToNextSlide() {
-		const currentIndex = this.state.currentIndex
+		const { currentIndex } = this.state.currentIndex
 		if (currentIndex < 4) {
 			this.setState({ currentIndex: currentIndex + 1 });
 		} else {
@@ -58,16 +67,48 @@ class App extends Component {
 	}
 
 	goToPrevSlide() {
-		const currentIndex = this.state.currentIndex
+		const { currentIndex }= this.state.currentIndex
 		if (currentIndex > 0) {
 			this.setState({ currentIndex: currentIndex - 1 });
 		} else {
 			this.setState({ currentIndex: 4 })
 		}
-  }
+	}
+	
+	handleOnChange(){
+		
+	}
+  
+	increaseCount(){
+		let count = this.state.addToCart.cart.count
+		count++
+		let newCount = count
+		this.setState({addToCart: {
+										cart: {
+										id: 1,
+										items: {},
+										count: newCount
+									}
+								}
+							});
+	}
 
-  
-  
+decreaseCount(){
+		let count = this.state.addToCart.cart.count
+		if(count === 1){
+			return
+		}
+		let newCount = count - 1
+		this.setState({addToCart: {
+										cart: {
+										id: 1,
+										items: {},
+										count: newCount
+									}
+								}
+							});
+	}
+	
   render() {
     return (
       <div className="App">
@@ -77,7 +118,11 @@ class App extends Component {
           <HomePage
           itemState = {this.state}
           goToPrevSlide={this.goToPrevSlide}
-          goToNextSlide={this.goToNextSlide}
+					goToNextSlide={this.goToNextSlide}
+					addToCart = {this.state.addToCart}				
+					handleOnChange={this.handleOnChange}
+					increaseCount={this.increaseCount.bind(this)}
+					decreaseCount={this.decreaseCount.bind(this)}
           /> );
           }}/>
         <Route path='/shop' component={()=>{

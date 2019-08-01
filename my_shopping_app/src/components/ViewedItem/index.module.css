@@ -73,11 +73,15 @@
 
 .viewedItem__addToCart {
 	display: flex;
+	align-items: center;
 	width: 380px;
 	height: 130px;
 }
 
 .itemQuantity {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: 190px;
 }
 

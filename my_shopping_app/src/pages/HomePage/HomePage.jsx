@@ -7,6 +7,8 @@ import Footer from '../../components/Footer/Footer.jsx';
 class HomePage extends Component {
 
 	render() {
+
+		console.log(this.props.increaseCount)
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
@@ -14,6 +16,10 @@ class HomePage extends Component {
 					itemList={this.props.itemState}
 					goToPrevSlide={this.props.goToPrevSlide}
 					goToNextSlide={this.props.goToNextSlide}
+					addToCart={this.props.addToCart}
+					handleOnChange={this.props.handleOnChange}
+					increaseCount={this.props.increaseCount}
+					decreaseCount={this.props.decreaseCount}
 				/>
 				<Footer />
 			</div>

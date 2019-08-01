@@ -5,6 +5,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 
 class CheckOutPage extends Component {
 	render() {
+		console.log(this.props)
 		return (
 			<div className={styles.Wrapper}>
 				<Header />

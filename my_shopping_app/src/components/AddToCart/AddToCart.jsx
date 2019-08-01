@@ -5,8 +5,6 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 export class AddToCart extends Component {
 	render() {
-
-
 		return (
 			<div>
 				<button className={styles.addBtn}>

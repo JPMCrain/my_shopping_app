@@ -19,8 +19,14 @@ class Slide extends Component {
 					</div>
 					<p className={styles.price}>${this.props.price}</p>
 					<div className={styles.AddtoCart__wrapper}>
-						<div className={styles.AddtoCartCount}><AddtoCartCount /></div>
-						<div className={styles.AddtoCart}><AddToCart /></div>
+						<div className={styles.AddtoCartCount}><AddtoCartCount
+							handleOnChange={this.props.handleOnChange}
+							addToCart={this.props.addToCart}
+							increaseCount={this.props.increaseCount}
+							decreaseCount={this.props.decreaseCount}
+						/>
+						</div>
+						<div className={styles.AddtoCart}><AddToCart addToCart={this.props.addToCart} /></div>
 					</div>
 
 				</div>
