@@ -1,0 +1,26 @@
+.cartItem__wrapper {
+	display: flex;
+	height: 40px;
+	background-color:  #e8d19d;
+}
+
+.cartCellTitle__wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+}
+
+.cartCellNumber__wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70px;
+}
+
+.cartCellImage__wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 70px;
+}

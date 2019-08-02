@@ -14,13 +14,7 @@ class App extends Component {
 		this.state = {
 			itemList: [],
 			currentIndex: 0,
-			addToCart: {
-				cart: {
-					id: 1,
-					items: {},
-				},
-			},
-			checkOutCart: {},
+			checkOutCart: [],
 			error: ""
     }
     
@@ -113,18 +107,15 @@ class App extends Component {
 	}
 
 	checkOutCart() {
-		const { itemList, currentIndex, addToCart } = this.state;
+		const { itemList, currentIndex, checkOutCart} = this.state;
 		let addedItem = itemList[currentIndex];
-
-		let checkOutCart = addToCart.cart.items;
-		checkOutCart.id = currentIndex + 1
-		checkOutCart.item = addedItem
-		this.setState({ checkOutCart });		
+		let cart = checkOutCart;
+		cart.push(addedItem);
+		this.setState({ checkOutCart: cart });		
 	}
 	
   render() {
-		const { addToCart, error } = this.state
-		console.log(error);
+		const { checkOutCart } = this.state
     return (
       <div className="App">
       <Router>
@@ -135,7 +126,7 @@ class App extends Component {
 							goToPrevSlide={this.goToPrevSlide}
 							goToNextSlide={this.goToNextSlide}
 							addToCartCount = {this.state}
-							addToCart = {addToCart}
+							addToCart = {checkOutCart}
 							checkOutCart={this.checkOutCart.bind(this)}				
 							handleCartCountOnChange={this.handleCartCountOnChange.bind(this)}
 							increaseCount={this.increaseCount.bind(this)}
@@ -147,7 +138,7 @@ class App extends Component {
           return <ShopPage/> 
           }}/>
         <Route path='/checkout' component={()=>{
-          return <CheckOutPage/>
+          return <CheckOutPage checkOutCartState = {this.state.checkOutCart}/>
           }}/>       
       </Router>
     </div>

@@ -1,0 +1,31 @@
+.cartItem__wrapper {
+	display: flex;
+	height: 70px;
+	text-align: center;
+	border: 2px solid #782644;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+
+.cartCellTitle__wrapper {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	text-align: center;
+	flex-wrap: wrap;
+	width: 250px;
+}
+
+.cartCellNumber__wrapper {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	width: 70px;
+}
+
+.cartImage {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	width: 70px;
+	height: 70px;
+}

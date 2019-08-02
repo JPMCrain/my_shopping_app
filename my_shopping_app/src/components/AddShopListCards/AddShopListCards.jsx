@@ -18,7 +18,7 @@ class AddShopListCards extends Component {
 		const { category, filters } = this.props;
 		const selectedItem = category.items[filters.itemKey];
 		const viewSelectedClass = filters.isItemViewPannelOpen ? styles.viewSelectedItemActive : styles.viewSelectedItem;
-		console.log(this.props);
+
 		return (
 			<div>
 				{
