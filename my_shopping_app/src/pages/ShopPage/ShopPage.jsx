@@ -6,6 +6,7 @@ import Footer from '../../components/Footer/Footer.jsx';
 import CatogoryList from '../../components/CatogoryList/CatogoryList';
 import AddShopListCards from '../../components/AddShopListCards/AddShopListCards';
 import ShopListHeader from '../../components/ShopListHeader/ShopListHeader';
+import jsonData from '../../components/json_source/itemsdata.json';
 
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -13,6 +14,8 @@ class ShopPage extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			catogoryLists: jsonData,
+			openIndex: null,
 			selectedCategory: undefined,
 			filteredCategory: undefined,
 			filters: {
@@ -35,14 +38,21 @@ class ShopPage extends Component {
 
 		this.onCategorytItemClick = this.onCategorytItemClick.bind(this);
 		this.onFilterChange = this.onFilterChange.bind(this);
+		this.onCategoryCatogoryClick = this.onCategoryCatogoryClick.bind(this);
 
 	}
 
-	onCategorytItemClick = (selectedCategory) => {
+	onCategoryCatogoryClick(index) {
+		this.setState({ openIndex: index })
+	}
+
+	onCategorytItemClick = (catogoryIndex, index) => {
+		const selectedCategory = jsonData[catogoryIndex].subcategories[index];
 		const { filters } = this.state;
 		const filteredCategory = this.filterCategoryItems(selectedCategory, filters)
 		this.setState({ selectedCategory, filteredCategory });
 	}
+
 
 	onFilterChange(filters) {
 		const { selectedCategory } = this.state;
@@ -134,9 +144,8 @@ class ShopPage extends Component {
 
 
 	render() {
-
-		const { filteredCategory, filters } = this.state;
-
+		const { filteredCategory, filters, catogoryLists, openIndex } = this.state;
+		console.log(catogoryLists)
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
@@ -144,8 +153,11 @@ class ShopPage extends Component {
 					<div className={styles.listWrapper}>
 						<CatogoryList
 							filters={filters}
+							catogoryLists={catogoryLists}
+							openIndex={openIndex}
 							onFilterChange={this.onFilterChange}
 							onCategorytItemClick={this.onCategorytItemClick}
+							onCategoryCatogoryClick={this.onCategoryCatogoryClick}
 						/>
 					</div>
 					<div className={styles.itemsWrapper}>
@@ -160,6 +172,7 @@ class ShopPage extends Component {
 									category={filteredCategory}
 									filters={filters}
 									onFilterChange={this.onFilterChange}
+									addToCartCount={this.state}
 									addToCart={this.state.addToCart}
 									handleOnChange={this.handleOnChange}
 									increaseCount={this.increaseCount.bind(this)}

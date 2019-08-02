@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './index.module.css';
 import AddToCart from '../AddToCart/AddToCart';
-import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
+// import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 
 function ViewedItem(props) {
 	return (
@@ -28,14 +28,16 @@ function ViewedItem(props) {
 				</div>
 				<div className={styles.viewedItem__addToCart}>
 					<div className={styles.itemQuantity}>
-						<AddtoCartCount
+						{/* <AddtoCartCount
+							addToCartCount={props.addToCartCount}
 							addToCart={props.addToCart}
 							handleOnChange={props.handleOnChange}
 							increaseCount={props.increaseCount}
-							decreaseCount={props.decreaseCount} />
+							decreaseCount={props.decreaseCount} /> */}
 					</div>
 					<div className={styles.addToCart}>
 						<AddToCart
+							addToCartCount={props.addToCartCount}
 							addToCart={props.addToCart}
 							handleOnChange={props.handleOnChange}
 							increaseCount={props.increaseCount}

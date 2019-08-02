@@ -34,7 +34,7 @@ class AddShopListCards extends Component {
 									rating={selectedItem.rating}
 									stock={selectedItem.stock}
 									onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', undefined) }}
-
+									addToCartCount={this.props.addToCartCount}
 									addToCart={this.props.addToCart}
 									handleOnChange={this.handleOnChange}
 									increaseCount={this.props.increaseCount}
@@ -53,7 +53,7 @@ class AddShopListCards extends Component {
 											name={item.name}
 											price={item.price}
 											onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', index) }}
-
+											addToCartCount={this.props.addToCartCount}
 											addToCart={this.props.addToCart}
 											handleOnChange={this.handleOnChange}
 											increaseCount={this.props.increaseCount}

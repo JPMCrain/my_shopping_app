@@ -15,7 +15,6 @@ class App extends Component {
 			itemList: [],
 			currentIndex: 0,
 			checkOutCart: [],
-			error: ""
     }
     
 		this.goToNextSlide = this.goToNextSlide.bind(this);
@@ -69,8 +68,8 @@ class App extends Component {
 		}
 	}
 	
-	handleCartCountOnChange(value, errorVal) {
-		const { itemList, currentIndex, error} = this.state;
+	handleCartCountOnChange(value) {
+		const { itemList, currentIndex} = this.state;
 		let currentItem = itemList[currentIndex]
 		value = parseInt(value)
 		if(isNaN(value)) {
@@ -78,14 +77,7 @@ class App extends Component {
 		} else {
 			currentItem.count = value;
 		}
-		let errorMsg = error
-		value = parseInt(value)
-		if(isNaN(value)) {
-			currentItem.count = "";
-		} else {
-			currentItem.count = value;
-		}
-		this.setState({itemList, error: errorMsg })
+		this.setState({itemList})
 	};
 
   
@@ -135,7 +127,7 @@ class App extends Component {
 					 );
           }}/>
         <Route path='/shop' component={()=>{
-          return <ShopPage/> 
+          return <ShopPage itemState = {this.state}/> 
           }}/>
         <Route path='/checkout' component={()=>{
           return <CheckOutPage checkOutCartState = {this.state.checkOutCart}/>

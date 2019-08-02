@@ -3,16 +3,16 @@ import styles from './index.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-const validate = (value, errMessage, pattern) => {
-	errMessage = "Must contain 2-3 digits"
-	const valid = new RegExp(pattern).test(value);
-	return valid ? value : errMessage;
-};
+// const validate = (value, errMessage, pattern) => {
+// 	errMessage = "Must contain 2-3 digits"
+// 	const valid = new RegExp(pattern).test(value);
+// 	return valid ? value : errMessage;
+// };
 
 class AddtoCartCount extends Component {
-	onQuantityChange(value, errMessage, pattern, min, max) {
-		const error = validate(value, errMessage, pattern);
-		this.props.handleCartCountOnChange(value, error, min, max);
+	onQuantityChange(value) {
+		// const error = validate(value, errMessage, pattern);
+		this.props.handleCartCountOnChange(value);
 	}
 
 	render() {
@@ -38,10 +38,8 @@ class AddtoCartCount extends Component {
 							const value = target.value;
 							const pattern = target.pattern;
 							const message = target.message;
-							console.log(message);
 							const min = target.min;
 							const max = target.max;
-							console.log(typeof (parseInt(min)) + "" + typeof (parseInt(max)))
 							this.onQuantityChange(value, message, pattern, min, max)
 						}}  {...this.props} />
 				</div>

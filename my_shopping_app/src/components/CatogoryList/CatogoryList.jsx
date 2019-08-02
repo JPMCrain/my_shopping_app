@@ -1,21 +1,9 @@
 import React, { Component } from 'react';
 import styles from './index.module.css';
 
-import jsonData from '../json_source/itemsdata.json';
+
 
 class CatogoryList extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			catogoryLists: jsonData,
-			openIndex: null
-		}
-		this.onCategorytItemClick = this.onCategorytItemClick.bind(this);
-	}
-
-	toggleList(e, index) {
-		this.setState({ openIndex: index })
-	}
 
 	onClickFilter(filterKey, index) {
 		let { filters } = this.props;
@@ -24,30 +12,27 @@ class CatogoryList extends Component {
 		this.props.onFilterChange(filters);
 	}
 
-	onCategorytItemClick = (catogoryIndex, index) => {
-		const category = jsonData[catogoryIndex].subcategories[index];
-		this.props.onCategorytItemClick(category);
-	}
-
 	render() {
-		const { catogoryLists } = this.state;
-		const { filters } = this.props;
+		const { catogoryLists, filters, openIndex } = this.props;
 		return (
 			<div className={styles.listWrapper}>
 				<ul>
 					{
 						catogoryLists.map((catogory, catogoryIndex) => {
+							const catlistItemStyle = openIndex === catogoryIndex ? styles.catlistItemActive : styles.catlistItem
 							return (
 								<li key={catogoryIndex}>
 									<h4
-										className={styles.catlistItem}
-										onClick={(e) => {
-											this.toggleList(e, catogoryIndex);
-										}}>
+										className={catlistItemStyle}
+										onClick={() => {
+											console.log(catogory.subcategories);
+											this.props.onCategoryCatogoryClick(catogoryIndex)
+										}}
+									>
 										{catogory.category}
 									</h4>
 									{
-										this.state.openIndex === catogoryIndex &&
+										this.props.openIndex === catogoryIndex &&
 										<ul>
 											{
 												catogory.subcategories.map((item, index) => {
@@ -58,9 +43,9 @@ class CatogoryList extends Component {
 															onClick={(e) => {
 																if (filters.isItemViewPannelOpen) {
 																	this.onClickFilter('isItemViewPannelOpen', undefined)
-																	this.onCategorytItemClick(catogoryIndex, index)
+																	this.props.onCategorytItemClick(catogoryIndex, index)
 																} else {
-																	this.onCategorytItemClick(catogoryIndex, index)
+																	this.props.onCategorytItemClick(catogoryIndex, index)
 																}
 															}}
 														>
