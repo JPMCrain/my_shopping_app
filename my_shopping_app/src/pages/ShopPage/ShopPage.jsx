@@ -128,6 +128,11 @@ class ShopPage extends Component {
 		});
 	}
 
+	checkOutCart() {
+		alert('im clicked')
+	}
+
+
 	render() {
 
 		const { filteredCategory, filters } = this.state;
@@ -158,7 +163,8 @@ class ShopPage extends Component {
 									addToCart={this.state.addToCart}
 									handleOnChange={this.handleOnChange}
 									increaseCount={this.increaseCount.bind(this)}
-									decreaseCount={this.decreaseCount.bind(this)} />
+									decreaseCount={this.decreaseCount.bind(this)}
+									checkOutCart={this.checkOutCart.bind(this)} />
 							</div>
 						}
 					</div>

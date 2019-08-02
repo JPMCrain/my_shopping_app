@@ -6,8 +6,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import CheckOutPage from './pages/CheckOutPage/CheckOutPage';
-
-
 import jsonData from './components/json_source/itemsdata.json';
 
 class App extends Component {
@@ -20,19 +18,19 @@ class App extends Component {
 				cart: {
 					id: 1,
 					items: {},
-					count: 1
 				},
-			}
+			},
+			checkOutCart: {},
+			error: ""
     }
     
 		this.goToNextSlide = this.goToNextSlide.bind(this);
 		this.goToPrevSlide = this.goToPrevSlide.bind(this);
-		this.handleOnChange = this.handleOnChange.bind(this);
+	
 	}
 
 	componentDidMount() {
 		this.getItems();
-		this.handleOnChange();
 	}
 
 	getItems() {
@@ -44,6 +42,7 @@ class App extends Component {
 			subcategoriesArray.forEach((subItem) => {
 				let itemArray = subItem.items;
 				itemArray.forEach((item) => {
+					item.count = 1;
 					allItems.push(item);
 				});
 			});
@@ -58,72 +57,91 @@ class App extends Component {
 	}
 
   goToNextSlide() {
-		const { currentIndex } = this.state.currentIndex
-		if (currentIndex < 4) {
-			this.setState({ currentIndex: currentIndex + 1 });
+		let newCurrentIndex = this.state.currentIndex
+		if (newCurrentIndex < 4) {
+			newCurrentIndex++
+			this.setState({ currentIndex: newCurrentIndex });
 		} else {
 			this.setState({ currentIndex: 0 })
 		}
 	}
 
 	goToPrevSlide() {
-		const { currentIndex }= this.state.currentIndex
-		if (currentIndex > 0) {
-			this.setState({ currentIndex: currentIndex - 1 });
+		let newCurrentIndex = this.state.currentIndex
+		if (newCurrentIndex > 0) {
+			this.setState({ currentIndex: newCurrentIndex - 1 });
 		} else {
 			this.setState({ currentIndex: 4 })
 		}
 	}
 	
-	handleOnChange(){
-		
-	}
+	handleCartCountOnChange(value, errorVal) {
+		const { itemList, currentIndex, error} = this.state;
+		let currentItem = itemList[currentIndex]
+		value = parseInt(value)
+		if(isNaN(value)) {
+			currentItem.count = "";
+		} else {
+			currentItem.count = value;
+		}
+		let errorMsg = error
+		value = parseInt(value)
+		if(isNaN(value)) {
+			currentItem.count = "";
+		} else {
+			currentItem.count = value;
+		}
+		this.setState({itemList, error: errorMsg })
+	};
+
   
 	increaseCount(){
-		let count = this.state.addToCart.cart.count
-		count++
-		let newCount = count
-		this.setState({addToCart: {
-										cart: {
-										id: 1,
-										items: {},
-										count: newCount
-									}
-								}
-							});
+		const { itemList, currentIndex } = this.state;
+		let currentItem = itemList[currentIndex]
+		currentItem.count++
+		this.setState({itemList})
 	}
 
-decreaseCount(){
-		let count = this.state.addToCart.cart.count
-		if(count === 1){
-			return
-		}
-		let newCount = count - 1
-		this.setState({addToCart: {
-										cart: {
-										id: 1,
-										items: {},
-										count: newCount
-									}
-								}
-							});
+	decreaseCount(){
+		const { itemList, currentIndex } = this.state;
+		let currentItem = itemList[currentIndex]
+			if(currentItem.count === 1)	{
+				return
+			}
+		currentItem.count--
+		this.setState({itemList})
+	}
+
+	checkOutCart() {
+		const { itemList, currentIndex, addToCart } = this.state;
+		let addedItem = itemList[currentIndex];
+
+		let checkOutCart = addToCart.cart.items;
+		checkOutCart.id = currentIndex + 1
+		checkOutCart.item = addedItem
+		this.setState({ checkOutCart });		
 	}
 	
   render() {
+		const { addToCart, error } = this.state
+		console.log(error);
     return (
       <div className="App">
       <Router>
         <Route exact path='/' component={()=> {
           return (
-          <HomePage
-          itemState = {this.state}
-          goToPrevSlide={this.goToPrevSlide}
-					goToNextSlide={this.goToNextSlide}
-					addToCart = {this.state.addToCart}				
-					handleOnChange={this.handleOnChange}
-					increaseCount={this.increaseCount.bind(this)}
-					decreaseCount={this.decreaseCount.bind(this)}
-          /> );
+						<HomePage
+							itemState = {this.state}
+							goToPrevSlide={this.goToPrevSlide}
+							goToNextSlide={this.goToNextSlide}
+							addToCartCount = {this.state}
+							addToCart = {addToCart}
+							checkOutCart={this.checkOutCart.bind(this)}				
+							handleCartCountOnChange={this.handleCartCountOnChange.bind(this)}
+							increaseCount={this.increaseCount.bind(this)}
+							decreaseCount={this.decreaseCount.bind(this)}
+						/>
+					 );
           }}/>
         <Route path='/shop' component={()=>{
           return <ShopPage/> 

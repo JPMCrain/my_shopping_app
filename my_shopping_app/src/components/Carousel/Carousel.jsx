@@ -22,10 +22,14 @@ class Carousel extends Component {
 						description={itemListRecieved[currentIndex].description}
 						price={itemListRecieved[currentIndex].price}
 						image={itemListRecieved[currentIndex].imagelink}
-						handleOnChange={this.props.handleOnChange()}
+						handleCartCountOnChange={this.props.handleCartCountOnChange}
 						increaseCount={this.props.increaseCount}
 						decreaseCount={this.props.decreaseCount}
-						addToCart={this.props.addToCart} />
+						addToCartCount={this.props.addToCartCount}
+						addToCart={this.props.addToCart}
+						checkOutCart={this.props.checkOutCart}
+					/>
+
 				}
 				<ArrowRight goToNextSlide={this.props.goToNextSlide}></ArrowRight>
 			</div>

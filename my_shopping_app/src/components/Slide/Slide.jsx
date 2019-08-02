@@ -6,6 +6,7 @@ import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 class Slide extends Component {
 	render() {
 		return (
+
 			<div className={styles.slideWrapper}>
 				<div>
 					<img className={styles.slideImage} src={this.props.image} alt={this.props.key} />
@@ -19,14 +20,22 @@ class Slide extends Component {
 					</div>
 					<p className={styles.price}>${this.props.price}</p>
 					<div className={styles.AddtoCart__wrapper}>
-						<div className={styles.AddtoCartCount}><AddtoCartCount
-							handleOnChange={this.props.handleOnChange}
-							addToCart={this.props.addToCart}
-							increaseCount={this.props.increaseCount}
-							decreaseCount={this.props.decreaseCount}
-						/>
+						<div className={styles.AddtoCartCount}>
+							{/* {error && 
+								<ErrorMessage>{error}</ErrorMessage> 
+																											}  */}
+							<AddtoCartCount
+								handleCartCountOnChange={this.props.handleCartCountOnChange}
+								addToCartCount={this.props.addToCartCount}
+								increaseCount={this.props.increaseCount}
+								decreaseCount={this.props.decreaseCount}
+							/>
 						</div>
-						<div className={styles.AddtoCart}><AddToCart addToCart={this.props.addToCart} /></div>
+						<div className={styles.AddtoCart}>
+							<AddToCart
+								addToCart={this.props.addToCart}
+								checkOutCart={this.props.checkOutCart} />
+						</div>
 					</div>
 
 				</div>

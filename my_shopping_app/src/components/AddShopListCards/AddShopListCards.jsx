@@ -39,6 +39,7 @@ class AddShopListCards extends Component {
 									handleOnChange={this.handleOnChange}
 									increaseCount={this.props.increaseCount}
 									decreaseCount={this.props.decreaseCount}
+									checkOutCart={this.props.checkOutCart}
 								/>
 							</div>
 						}
@@ -57,6 +58,7 @@ class AddShopListCards extends Component {
 											handleOnChange={this.handleOnChange}
 											increaseCount={this.props.increaseCount}
 											decreaseCount={this.props.decreaseCount}
+											checkOutCart={this.props.checkOutCart}
 										/>
 									)
 								})

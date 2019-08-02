@@ -7,7 +7,13 @@ export class AddToCart extends Component {
 	render() {
 		return (
 			<div>
-				<button className={styles.addBtn}>
+				<button
+					onClick={(e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						this.props.checkOutCart(e);
+					}}
+					className={styles.addBtn}>
 					<FontAwesomeIcon className={styles.Icon} icon={faCartArrowDown} />
 					Add to Cart
 				</button>

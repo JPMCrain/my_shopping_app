@@ -3,19 +3,47 @@ import styles from './index.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
+const validate = (value, errMessage, pattern) => {
+	errMessage = "Must contain 2-3 digits"
+	const valid = new RegExp(pattern).test(value);
+	return valid ? value : errMessage;
+};
+
 class AddtoCartCount extends Component {
+	onQuantityChange(value, errMessage, pattern, min, max) {
+		const error = validate(value, errMessage, pattern);
+		this.props.handleCartCountOnChange(value, error, min, max);
+	}
+
 	render() {
-		let count = this.props.addToCart.cart.count
-		console.log(this.props.addToCart.cart.count)
+		const { addToCartCount } = this.props
+		const itemListRecieved = addToCartCount.itemList
+		const currentIndex = addToCartCount.currentIndex
+
 		return (
 			<div className={styles.wrapper}>
+
 				<div className={styles.input__wrapper}>
 					<input
+						pattern="^[0-9]{2,3}$"
+						name="number"
 						className={styles.input}
+						message={"Add items 1-99 at a time!"}
 						type="numer"
 						min='1'
-						value={count}
-						onChange={this.props.handleOnChange} />
+						max='99'
+						value={itemListRecieved[currentIndex].count}
+						onChange={(e) => {
+							const target = e.target;
+							const value = target.value;
+							const pattern = target.pattern;
+							const message = target.message;
+							console.log(message);
+							const min = target.min;
+							const max = target.max;
+							console.log(typeof (parseInt(min)) + "" + typeof (parseInt(max)))
+							this.onQuantityChange(value, message, pattern, min, max)
+						}}  {...this.props} />
 				</div>
 				<div className={styles.button__wrapper}>
 					<button

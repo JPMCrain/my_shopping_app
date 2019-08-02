@@ -39,7 +39,8 @@ function ViewedItem(props) {
 							addToCart={props.addToCart}
 							handleOnChange={props.handleOnChange}
 							increaseCount={props.increaseCount}
-							decreaseCount={props.decreaseCount} />
+							decreaseCount={props.decreaseCount}
+							checkOutCart={props.checkOutCart} />
 					</div>
 				</div>
 			</div>

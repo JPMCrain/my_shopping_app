@@ -28,9 +28,7 @@ class ItemCard extends Component {
 					<div className={styles.itemAddToCart}>
 						<AddToCart
 							addToCart={this.props.addToCart}
-							handleOnChange={this.handleOnChange}
-							increaseCount={this.props.increaseCount}
-							decreaseCount={this.props.decreaseCount} />
+							checkOutCart={this.props.checkOutCart} />
 					</div>
 				</div>
 
