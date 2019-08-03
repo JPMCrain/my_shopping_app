@@ -6,146 +6,13 @@ import Footer from '../../components/Footer/Footer.jsx';
 import CatogoryList from '../../components/CatogoryList/CatogoryList';
 import AddShopListCards from '../../components/AddShopListCards/AddShopListCards';
 import ShopListHeader from '../../components/ShopListHeader/ShopListHeader';
-import jsonData from '../../components/json_source/itemsdata.json';
 
-import cloneDeep from 'lodash/cloneDeep';
 
 class ShopPage extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			catogoryLists: jsonData,
-			openIndex: null,
-			selectedCategory: undefined,
-			filteredCategory: undefined,
-			filters: {
-				sortByPrice: false,
-				filterByPrice: false,
-				filterByStock: false,
-				isItemViewPannelOpen: false,
-				itemKey: undefined,
-				min: undefined,
-				max: undefined,
-			},
-			addToCart: {
-				cart: {
-					id: 1,
-					items: {},
-					count: 1
-				}
-			}
-		}
-
-		this.onCategorytItemClick = this.onCategorytItemClick.bind(this);
-		this.onFilterChange = this.onFilterChange.bind(this);
-		this.onCategoryCatogoryClick = this.onCategoryCatogoryClick.bind(this);
-
-	}
-
-	onCategoryCatogoryClick(index) {
-		this.setState({ openIndex: index })
-	}
-
-	onCategorytItemClick = (catogoryIndex, index) => {
-		const selectedCategory = jsonData[catogoryIndex].subcategories[index];
-		const { filters } = this.state;
-		const filteredCategory = this.filterCategoryItems(selectedCategory, filters)
-		this.setState({ selectedCategory, filteredCategory });
-	}
-
-
-	onFilterChange(filters) {
-		const { selectedCategory } = this.state;
-		const filteredCategory = this.filterCategoryItems(selectedCategory, filters)
-		this.setState({ filters, filteredCategory });
-	}
-
-	filterCategoryItems(category, filters) {
-		const filteredCategory = cloneDeep(category);
-
-		if (filters.sortByPrice) {
-			this.sortByPrice(filteredCategory)
-		}
-
-		if (filters.filterByStock) {
-			this.filterByStock(filteredCategory)
-		}
-
-		if (filters.filterByPrice) {
-			this.filterByPrice(filteredCategory)
-		}
-
-		return filteredCategory;
-	}
-
-	sortByPrice(filteredCategory) {
-		filteredCategory.items.sort(function (a, b) {
-			return parseFloat(b.price) - parseFloat(a.price);
-		});
-	}
-
-	filterByStock(filteredCategory) {
-		let newfilteredCategory = filteredCategory.items.filter((item) => {
-			return item.stock > 0;
-		});
-		filteredCategory.items = newfilteredCategory;
-	}
-
-	filterByPrice(filteredCategory) {
-		const { filters } = this.state;
-		const expectedMin = filters.min || 0
-		let newfilteredCategory = filteredCategory.items.filter((item) => {
-			const expectedMax = filters.max || item.price
-			const min = Math.min(expectedMin, expectedMax);
-			const max = Math.max(expectedMin, expectedMax);
-			return item.price >= min && item.price <= max
-		});
-		filteredCategory.items = newfilteredCategory;
-	}
-	handleOnChange() {
-
-	}
-
-	increaseCount() {
-		let count = this.state.addToCart.cart.count
-		count++
-		let newCount = count
-		this.setState({
-			addToCart: {
-				cart: {
-					id: 1,
-					items: {},
-					count: newCount
-				}
-			}
-		});
-	}
-
-	decreaseCount() {
-		let count = this.state.addToCart.cart.count
-		if (count === 1) {
-			return
-		}
-		let newCount = count - 1
-		this.setState({
-			addToCart: {
-				cart: {
-					id: 1,
-					items: {},
-					count: newCount
-				}
-			}
-		});
-	}
-
-	checkOutCart() {
-		alert('im clicked')
-	}
-
-
 	render() {
-		const { filteredCategory, filters, catogoryLists, openIndex } = this.state;
-		console.log(catogoryLists)
+
+		const { filteredCategory, filters, catogoryLists, openIndex } = this.props;
+
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
@@ -155,9 +22,9 @@ class ShopPage extends Component {
 							filters={filters}
 							catogoryLists={catogoryLists}
 							openIndex={openIndex}
-							onFilterChange={this.onFilterChange}
-							onCategorytItemClick={this.onCategorytItemClick}
-							onCategoryCatogoryClick={this.onCategoryCatogoryClick}
+							onFilterChange={this.props.onFilterChange}
+							onCatogoryClick={this.props.onCatogoryClick}
+							onCategorytItemClick={this.props.onCategorytItemClick}
 						/>
 					</div>
 					<div className={styles.itemsWrapper}>
@@ -166,18 +33,17 @@ class ShopPage extends Component {
 								<ShopListHeader
 									title={filteredCategory.name}
 									filters={filters}
-									onFilterChange={this.onFilterChange}
+									onFilterChange={this.props.onFilterChange}
 								/>
 								<AddShopListCards
 									category={filteredCategory}
 									filters={filters}
-									onFilterChange={this.onFilterChange}
-									addToCartCount={this.state}
-									addToCart={this.state.addToCart}
-									handleOnChange={this.handleOnChange}
-									increaseCount={this.increaseCount.bind(this)}
-									decreaseCount={this.decreaseCount.bind(this)}
-									checkOutCart={this.checkOutCart.bind(this)} />
+									onFilterChange={this.props.onFilterChange}
+									addToCartCount={this.props}
+									addToCart={this.props.addToCart}
+									increaseCount={this.props.increaseCount}
+									decreaseCount={this.props.decreaseCount}
+									checkOutCart={this.props.checkOutCart} />
 							</div>
 						}
 					</div>

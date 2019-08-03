@@ -21,9 +21,6 @@ class Slide extends Component {
 					<p className={styles.price}>${this.props.price}</p>
 					<div className={styles.AddtoCart__wrapper}>
 						<div className={styles.AddtoCartCount}>
-							{/* {error && 
-								<ErrorMessage>{error}</ErrorMessage> 
-																											}  */}
 							<AddtoCartCount
 								handleCartCountOnChange={this.props.handleCartCountOnChange}
 								addToCartCount={this.props.addToCartCount}

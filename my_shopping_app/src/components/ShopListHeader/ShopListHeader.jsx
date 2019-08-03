@@ -17,12 +17,13 @@ class SortButtonsTab extends Component {
 		let { filters } = this.props;
 		const filterKey = e.target.name;
 		filters[filterKey] = e.target.value;
+		console.log(`${filters} + "filters"`)
 		this.props.onFilterChange(filters);
 	}
 
 	render() {
 		const { title, filters } = this.props;
-
+		console.log(filters);
 		return (
 
 			<div>
@@ -43,6 +44,7 @@ class SortButtonsTab extends Component {
 							<input
 								className={styles.input}
 								min="0"
+								max="100"
 								type='number'
 								name='max'
 								onChange={this.handleMinMaxValueChange.bind(this)} />

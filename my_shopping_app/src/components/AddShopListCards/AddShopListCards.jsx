@@ -9,6 +9,7 @@ class AddShopListCards extends Component {
 
 	onClickFilter(filterKey, index) {
 		let { filters } = this.props;
+		console.log(filterKey);
 		filters[filterKey] = !filters[filterKey];
 		filters.itemKey = index;
 		this.props.onFilterChange(filters);
@@ -16,7 +17,9 @@ class AddShopListCards extends Component {
 
 	render() {
 		const { category, filters } = this.props;
-		const selectedItem = category.items[filters.itemKey];
+
+		// const selectedItem = category.items[filters.itemKey];
+		console.log()
 		const viewSelectedClass = filters.isItemViewPannelOpen ? styles.viewSelectedItemActive : styles.viewSelectedItem;
 
 		return (
@@ -24,16 +27,18 @@ class AddShopListCards extends Component {
 				{
 					category && category.items &&
 					<div className={styles.Wrapper}>
-						{filters && filters.isItemViewPannelOpen && selectedItem &&
+						{filters && filters.isItemViewPannelOpen && category.items[filters.itemKey] &&
 							<div className={viewSelectedClass}>
 								<ViewedItem
-									image={selectedItem.imagelink}
-									name={selectedItem.name}
-									price={selectedItem.price}
-									description={selectedItem.description}
-									rating={selectedItem.rating}
-									stock={selectedItem.stock}
-									onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', undefined) }}
+									image={category.items[filters.itemKey].imagelink}
+									name={category.items[filters.itemKey].name}
+									price={category.items[filters.itemKey].price}
+									description={category.items[filters.itemKey].description}
+									rating={category.items[filters.itemKey].rating}
+									stock={category.items[filters.itemKey].stock}
+									onItemClick={() => {
+										this.onClickFilter('isItemViewPannelOpen', undefined)
+									}}
 									addToCartCount={this.props.addToCartCount}
 									addToCart={this.props.addToCart}
 									handleOnChange={this.handleOnChange}
@@ -52,7 +57,10 @@ class AddShopListCards extends Component {
 											image={item.imagelink}
 											name={item.name}
 											price={item.price}
-											onItemClick={() => { this.onClickFilter('isItemViewPannelOpen', index) }}
+											onItemClick={() => {
+
+												this.onClickFilter('isItemViewPannelOpen', index)
+											}}
 											addToCartCount={this.props.addToCartCount}
 											addToCart={this.props.addToCart}
 											handleOnChange={this.handleOnChange}

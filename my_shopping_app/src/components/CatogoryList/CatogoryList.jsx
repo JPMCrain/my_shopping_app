@@ -22,22 +22,22 @@ class CatogoryList extends Component {
 							const catlistItemStyle = openIndex === catogoryIndex ? styles.catlistItemActive : styles.catlistItem
 							return (
 								<li key={catogoryIndex}>
-									<h4
-										className={catlistItemStyle}
-										onClick={() => {
-											console.log(catogory.subcategories);
-											this.props.onCategoryCatogoryClick(catogoryIndex)
-										}}
-									>
+									<button className={catlistItemStyle}
+										onClick={(e) => {
+											this.props.onCatogoryClick(catogoryIndex)
+										}}>
 										{catogory.category}
-									</h4>
+									</button>
+
+
 									{
 										this.props.openIndex === catogoryIndex &&
 										<ul>
 											{
 												catogory.subcategories.map((item, index) => {
+
 													return (
-														<li
+														<li><button
 															className={styles.sublistItem}
 															key={index}
 															onClick={(e) => {
@@ -47,9 +47,10 @@ class CatogoryList extends Component {
 																} else {
 																	this.props.onCategorytItemClick(catogoryIndex, index)
 																}
-															}}
-														>
+															}}>
 															{item.name}
+														</button>
+
 														</li>
 													);
 												})
