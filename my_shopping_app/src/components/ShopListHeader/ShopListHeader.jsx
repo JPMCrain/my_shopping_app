@@ -23,7 +23,6 @@ class SortButtonsTab extends Component {
 
 	render() {
 		const { title, filters } = this.props;
-		console.log(filters);
 		return (
 
 			<div>

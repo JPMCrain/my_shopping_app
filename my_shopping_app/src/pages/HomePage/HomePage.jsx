@@ -16,7 +16,9 @@ class HomePage extends Component {
 					goToNextSlide={this.props.goToNextSlide}
 					addToCartCount={this.props.addToCartCount}
 					addToCart={this.props.addToCart}
+
 					checkOutCart={this.props.checkOutCart}
+
 					handleCartCountOnChange={this.props.handleCartCountOnChange}
 					increaseCount={this.props.increaseCount}
 					decreaseCount={this.props.decreaseCount}

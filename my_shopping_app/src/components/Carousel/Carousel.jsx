@@ -11,6 +11,7 @@ class Carousel extends Component {
 
 	render() {
 		const { itemList } = this.props
+		console.log(this.props)
 		const itemListRecieved = itemList.itemList
 		const currentIndex = itemList.currentIndex
 		return (
@@ -27,7 +28,13 @@ class Carousel extends Component {
 						decreaseCount={this.props.decreaseCount}
 						addToCartCount={this.props.addToCartCount}
 						addToCart={this.props.addToCart}
-						checkOutCart={this.props.checkOutCart}
+
+						checkOutCart={(e) => {
+							e.preventDefault();
+							e.stopPropagation();
+							let cartItem = itemListRecieved[currentIndex];
+							this.props.checkOutCart(cartItem)
+						}}
 					/>
 
 				}

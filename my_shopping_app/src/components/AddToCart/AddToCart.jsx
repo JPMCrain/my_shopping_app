@@ -9,8 +9,6 @@ export class AddToCart extends Component {
 			<div>
 				<button
 					onClick={(e) => {
-						e.preventDefault();
-						e.stopPropagation();
 						this.props.checkOutCart(e);
 					}}
 					className={styles.addBtn}>

@@ -5,6 +5,7 @@ import AddToCart from '../AddToCart/AddToCart';
 // import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 
 class ItemCard extends Component {
+
 	render() {
 		return (
 			<div onClick={this.props.onItemClick} className={styles.itemWrapper}>
@@ -19,15 +20,12 @@ class ItemCard extends Component {
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>
-						{/* <AddtoCartCount
-							addToCartCount={this.props.addToCartCount}
-							handleOnChange={this.handleOnChange}
-							increaseCount={this.props.increaseCount}
-							decreaseCount={this.props.decreaseCount} /> */}
 					</div>
 					<div className={styles.itemAddToCart}>
 						<AddToCart
+							key={this.props.index}
 							addToCart={this.props.addToCart}
+
 							checkOutCart={this.props.checkOutCart} />
 					</div>
 				</div>

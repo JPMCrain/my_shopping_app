@@ -38,11 +38,16 @@ class ShopPage extends Component {
 								<AddShopListCards
 									category={filteredCategory}
 									filters={filters}
+
 									onFilterChange={this.props.onFilterChange}
+
 									addToCartCount={this.props}
+
 									addToCart={this.props.addToCart}
+
 									increaseCount={this.props.increaseCount}
 									decreaseCount={this.props.decreaseCount}
+
 									checkOutCart={this.props.checkOutCart} />
 							</div>
 						}

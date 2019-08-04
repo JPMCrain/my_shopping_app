@@ -18,6 +18,7 @@ class App extends Component {
 			openIndex: null,
 			
 			itemList: [],
+			homeSliderList: [],
 			currentIndex: 0,
 
 			selectedCategory: undefined,
@@ -53,24 +54,28 @@ class App extends Component {
 	getItems() {
 		let itemDataArray = jsonData;
 		let allItems = [];
+		let randomAll = [];
 		let randomFiveItems = [];
 		itemDataArray.forEach((dataItem) => {
 			let subcategoriesArray = dataItem.subcategories;
+			allItems.push(subcategoriesArray);
 			subcategoriesArray.forEach((subItem) => {
 				let itemArray = subItem.items;
 				itemArray.forEach((item) => {
-					item.count = 1;
-					allItems.push(item);
+					item.count = 1;	
+					randomAll.push(item);	
 				});
 			});
 		});
-		for (let i = 0; i < allItems.length; i++) {
-			let randomItem = allItems[Math.floor(Math.random() * allItems.length)];
+		for (let i = 0; i < randomAll.length; i++) {
+			let randomItem = randomAll[Math.floor(Math.random() * randomAll.length)];
 			if (randomFiveItems.length < 5) {
 				randomFiveItems.push(randomItem);
 			}
 		}
-		this.setState({ itemList: randomFiveItems });
+		this.setState({ 
+			itemList: randomFiveItems, 
+			homeSliderList: randomFiveItems,});
 	}
 
   goToNextSlide() {
@@ -123,9 +128,9 @@ class App extends Component {
 		this.setState({itemList})
 	}
 
-	checkOutCart() {
-		const { itemList, currentIndex, checkOutCart} = this.state;
-		let addedItem = itemList[currentIndex];
+	checkOutCart(cartItem) {
+		const { checkOutCart } = this.state;
+		let addedItem = cartItem;
 		let cart = checkOutCart;
 		cart.push(addedItem);
 		this.setState({ checkOutCart: cart });		
@@ -154,7 +159,6 @@ class App extends Component {
 
 	onFilterChange(filters) {
 		const { selectedCategory } = this.state;
-		console.log(filters);
 		const filteredCategory = this.filterCategoryItems(selectedCategory, filters)
 		this.setState({ filters, filteredCategory });
 	}
@@ -204,8 +208,8 @@ class App extends Component {
 	
   render() {
 		const { checkOutCart, filteredCategory, filters, catogoryLists, openIndex } = this.state
-
-    return (
+		console.log(this.state.filters.itemKey);
+		return (
       <div className="App">
       <Router>
         <Route exact path='/' component={()=> {
@@ -216,7 +220,9 @@ class App extends Component {
 							goToNextSlide={this.goToNextSlide}
 							addToCartCount = {this.state}
 							addToCart = {checkOutCart}
-							checkOutCart={this.checkOutCart.bind(this)}				
+
+							checkOutCart={this.checkOutCart.bind(this)}	
+
 							handleCartCountOnChange={this.handleCartCountOnChange.bind(this)}
 							increaseCount={this.increaseCount.bind(this)}
 							decreaseCount={this.decreaseCount.bind(this)}
@@ -225,20 +231,24 @@ class App extends Component {
           }}/>
         <Route path='/shop' component={()=>{
 					return <ShopPage 
-					itemState = {this.state}
-					filteredCategory={filteredCategory}
-					catogoryLists={catogoryLists}
-					filters={filters}
-					openIndex={openIndex}
-					onFilterChange={this.onFilterChange.bind(this)}
-					onCategorytItemClick={this.onCategorytItemClick.bind(this)}
-					onCatogoryClick={this.onCatogoryClick.bind(this)}
-					addToCartCount = {this.state}
-					addToCart = {checkOutCart}
-					checkOutCart={this.checkOutCart.bind(this)}				
-					handleCartCountOnChange={this.handleCartCountOnChange.bind(this)}
-					increaseCount={this.increaseCount.bind(this)}
-					decreaseCount={this.decreaseCount.bind(this)}/> 
+						itemState = {this.state}
+						filteredCategory={filteredCategory}
+						catogoryLists={catogoryLists}
+						filters={filters}
+						openIndex={openIndex}
+						index={this.props.index}
+						item={this.props.item}
+						onFilterChange={this.onFilterChange.bind(this)}
+						onCategorytItemClick={this.onCategorytItemClick.bind(this)}
+						onCatogoryClick={this.onCatogoryClick.bind(this)}
+						addToCartCount = {this.state}
+						addToCart = {checkOutCart}
+
+						checkOutCart={this.checkOutCart.bind(this)}
+
+						handleCartCountOnChange={this.handleCartCountOnChange.bind(this)}
+						increaseCount={this.increaseCount.bind(this)}
+						decreaseCount={this.decreaseCount.bind(this)}/> 
           }}/>
         <Route path='/checkout' component={()=>{
           return <CheckOutPage checkOutCartState = {this.state.checkOutCart}/>
