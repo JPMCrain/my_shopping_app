@@ -5,26 +5,7 @@ import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 class AddtoCartCount extends Component {
 
-	getValue() {
-		let value = 1;
-		return value
-		// if (this.props.addToCartCount.filteredCategory === undefined) {
-		// 	let homeItems = this.props.addToCartCount.itemList;
-		// 	let homeItemIndex = this.props.addToCartCount.currentIndex;
-		// 	value = homeItems[homeItemIndex].count
-		// 	return value
-		// } else if (value === undefined) {
-		// 	let filteredItems = this.props.addToCartCount.addToCartCount.filteredCategory.items;
-		// 	let filteredItemIndex = this.props.addToCartCount.index;
-		// 	value = filteredItems[filteredItemIndex].count
-		// 	return value
-		// }
-	}
-
 	render() {
-		console.log('props for count');
-		console.log(this.props);
-
 		return (
 			<div className={styles.wrapper}>
 
@@ -34,7 +15,7 @@ class AddtoCartCount extends Component {
 						name="number"
 						className={styles.input}
 						message={"Add items 1-99 at a time!"}
-						value={this.getValue()}
+						value={this.props.value}
 						type="numer"
 						min='1'
 						max='99'

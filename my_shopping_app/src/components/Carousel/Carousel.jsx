@@ -11,7 +11,6 @@ class Carousel extends Component {
 
 	render() {
 		const { itemList } = this.props
-		console.log(this.props)
 		const itemListRecieved = itemList.itemList
 		const currentIndex = itemList.currentIndex
 		return (
@@ -29,8 +28,6 @@ class Carousel extends Component {
 							e.stopPropagation();
 							this.props.handleCartCountOnChange()
 						}}
-
-
 						increaseCount={(e) => {
 							e.preventDefault();
 							e.stopPropagation();

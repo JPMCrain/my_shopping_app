@@ -49,6 +49,7 @@ class AddShopListCards extends Component {
 						<div className={styles.cardsWrapper}>
 							{
 								category.items.map((item, index) => {
+									console.log(item)
 									return (
 										<ItemCard
 											key={index}
@@ -59,16 +60,13 @@ class AddShopListCards extends Component {
 											onItemClick={() => {
 												this.onClickFilter('isItemViewPannelOpen', index)
 											}}
-
+											value={item.count}
 											addToCartCount={this.props.addToCartCount}
 											handleCartCountOnChange={this.props.handleCartCountOnChange}
-
-											value={item.count}
 											addToCart={this.props.addToCart}
 											increaseCount={(e) => {
 												e.preventDefault();
 												e.stopPropagation();
-												console.log(index)
 												this.props.increaseCount(index);
 											}}
 											decreaseCount={(e) => {

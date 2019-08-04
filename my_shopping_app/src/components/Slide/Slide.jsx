@@ -22,6 +22,7 @@ class Slide extends Component {
 					<div className={styles.AddtoCart__wrapper}>
 						<div className={styles.AddtoCartCount}>
 							<AddtoCartCount
+								value={this.props.value}
 								handleCartCountOnChange={this.props.handleCartCountOnChange}
 								addToCartCount={this.props.addToCartCount}
 								increaseCount={this.props.increaseCount}

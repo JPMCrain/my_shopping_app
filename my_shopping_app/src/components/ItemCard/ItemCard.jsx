@@ -22,6 +22,7 @@ class ItemCard extends Component {
 					<div className={styles.itemQuantity}>
 						<AddtoCartCount
 							addToCartCount={this.props}
+							value={this.props.value}
 							handleCartCountOnChange={this.props.handleCartCountOnChange}
 							increaseCount={this.props.increaseCount}
 							decreaseCount={this.props.decreaseCount}

@@ -18,10 +18,10 @@ class Header extends Component {
 					</div>
 					<div className={styles.headingTabs}>
 						<Link to='/'>
-							<button onClick={this.props.linkOnclick} className={goTab}>Home</button>
+							<button onClick={this.props.linkOnclick} disabled={this.props.home} className={goTab}>Home</button>
 						</Link>
 						<Link to='/shop'>
-							<button onClick={this.props.linkOnclick} className={goTabShop}>Go to Shop</button>
+							<button onClick={this.props.linkOnclick} disabled={this.props.shop} className={goTabShop}>Go to Shop</button>
 						</Link>
 						<Link to='/checkout'>
 							<button className={styles.goToCartTab}>
