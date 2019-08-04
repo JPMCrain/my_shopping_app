@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header.jsx';
 import Footer from '../../components/Footer/Footer.jsx';
 import CartItem from '../../components/CartItem/CartItem';
 import CartItemHeader from '../../components/CartItemHeader/CartItemHeader';
+import CheckOutForm from '../../components/CheckOutForm/CheckOutForm';
 
 class CheckOutPage extends Component {
 	render() {
@@ -22,25 +23,25 @@ class CheckOutPage extends Component {
 								image="Image"
 								total="Total"
 								counter="Counter"
-								/>
-						{					
-							checkOutCartState.map((item, index)=>{
-								return ( 
-								<CartItem
-								key={index}
-								name={item.name}
-								price={item.price}
-								count={item.count}
-								image={item.imagelink}
-								stock={item.stock}
-								/>)
-							})
-						}		
+							/>
+							{
+								checkOutCartState.map((item, index) => {
+									return (
+										<CartItem
+											key={index}
+											name={item.name}
+											price={item.price}
+											count={item.count}
+											image={item.imagelink}
+											stock={item.stock}
+										/>)
+								})
+							}
 						</div>
 
 					</div>
 					<div className={styles.midWrapper__section2}>
-
+						<CheckOutForm />
 					</div>
 				</div>
 				<Footer />

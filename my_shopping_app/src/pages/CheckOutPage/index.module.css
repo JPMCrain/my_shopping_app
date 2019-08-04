@@ -31,7 +31,7 @@
 }
 
 .midWrapper__section2 {
-	flex-grow: 2;
+	width: 500px;
 	height: 520px;
-	border: 2px solid snow;
+	background-color:  #782644;
 }

@@ -1,0 +1,121 @@
+.form__wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 350px;
+	
+}
+
+.inputfield__wrapper { 
+	font-size: 0.8em;
+	color: snow;
+	margin-top: 10px;
+	width: 400px;
+	display: flex;
+	justify-content: space-between;
+	line-height: 35px;
+}
+
+.input {
+	font-size: 1.6em;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	width: 310px;
+	height: 30px;
+	color: #782644;
+	background-color: #18202c;
+	border-bottom: 3px solid #86c4b3;
+}
+.input:hover {
+	background-color: #86c4b3;
+	border-bottom: 3px solid #18202c;
+}
+.inputActive {
+	font-size: 1.6em;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	width: 310px;
+	height: 30px;
+	color: #782644;
+	background-color: #86c4b3;
+	border-bottom: 3px solid #18202c;
+}
+
+.Message__wrapper {
+	color: snow;
+	
+	font-size: 0.8em;
+	margin-top: 10px;
+	width: 400px;
+	display: flex;
+	justify-content: space-between;
+	line-height: 100px;
+}
+
+.message {
+	font-size: 2em;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	width: 310px;
+	height: 100px;
+	color: #782644;
+	background-color: #18202c;
+	border-bottom: 3px solid #86c4b3;
+	border-top: 3px solid #86c4b3;
+}
+
+.message:hover {
+	color: #782644;
+	background-color: #86c4b3;
+	border-top: 3px solid #18202c;
+	border-bottom: 3px solid #18202c;
+}
+
+.messageActive {
+	font-size: 2em;
+	padding-left: 15px;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	width: 310px;
+	height: 100px;
+	color: #782644;
+	background-color: #86c4b3;
+	border-bottom: 3px solid #86c4b3;
+	border-top: 3px solid #86c4b3;
+
+}
+
+.button__wrapper {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 400px;
+	height: 80px;
+}
+
+.button {
+	border: none;
+	outline: none;
+	height: 30px;
+	font-size: 1.2em;
+	padding: 5px;
+	margin-right: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 20px;
+	background-color: #18202c;
+	color: #86c4b3;
+}
+
+.button:hover {
+	color: #782644;
+	background-color: #86c4b3;
+	border-bottom: 3px solid #18202c;
+}
