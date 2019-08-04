@@ -3,7 +3,7 @@ import styles from './index.module.css';
 
 class CartItem extends Component {
 	render() {
-		console.log(this.props)
+		console.log(this.props.total)
 		return (
 			<div className={styles.cartItem__wrapper}>
 				<div>
@@ -22,7 +22,7 @@ class CartItem extends Component {
 					<p>X {this.props.count}</p>
 				</div>
 				<div className={styles.cartCellNumber__wrapper}>
-					<p>$</p>
+					<p>$ {this.props.total}</p>
 				</div>
 
 			</div>

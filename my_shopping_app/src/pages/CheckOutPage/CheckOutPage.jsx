@@ -7,9 +7,10 @@ import CartItemHeader from '../../components/CartItemHeader/CartItemHeader';
 import CheckOutForm from '../../components/CheckOutForm/CheckOutForm';
 
 class CheckOutPage extends Component {
+
 	render() {
 		const { checkOutCartState } = this.props
-
+		console.log(checkOutCartState)
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
@@ -33,6 +34,7 @@ class CheckOutPage extends Component {
 											price={item.price}
 											count={item.count}
 											image={item.imagelink}
+											total={item.total}
 											stock={item.stock}
 										/>)
 								})

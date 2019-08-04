@@ -65,7 +65,8 @@ class App extends Component {
 				let itemArray = subItem.items;
 				itemArray.forEach((item) => {
 					item.count = 1;	
-					randomAll.push(item);	
+					item.total = item.price;
+					randomAll.push(item);
 				});
 			});
 		});
@@ -109,20 +110,29 @@ class App extends Component {
 		// } else {
 		// 	currentItem.count = value;
 		// }
+		// let total = currentItem.count * currentItem.price
+		// currentItem.total = total
 		// this.setState({itemList})
 	};
 
   //Number Input for Count
 	increaseCount(index){
-		console.log(index)
 		const { filteredCategory, itemList } = this.state;
 		if(filteredCategory){
 			let currentItem = filteredCategory.items[index]
+			
 			++currentItem.count
+			
+			let total = currentItem.count * currentItem.price
+			currentItem.total = total
 			this.setState({filteredCategory})
 		} else {
 			let currentItem = itemList[index]
+			
 			currentItem.count++
+
+			let total = currentItem.count * currentItem.price
+			currentItem.total = total
 			this.setState({itemList})
 		}
 
@@ -136,13 +146,22 @@ class App extends Component {
 				return
 			}
 			--currentItem.count
+		
+			let total = currentItem.count * currentItem.price
+			currentItem.total = total
+
 			this.setState({filteredCategory})
 		} else {
 			let currentItem = itemList[index]
 			if(currentItem.count === 1){
 				return
 			}
+
 			--currentItem.count
+
+			let total = Math.round(currentItem.count * currentItem.price)
+			currentItem.total = total
+
 			this.setState({itemList})
 		}
 
@@ -150,20 +169,13 @@ class App extends Component {
 
 	checkOutCart(cartItem, index) {
 		const { checkOutCart } = this.state;
-		// const { filteredCategory, itemList } = this.state;
-		// // if(filteredCategory){
-		// 	let currentItem = filteredCategory.items[index]
-		// 	currentItem.count = 1
-		// 	this.setState({filteredCategory})
-		// } else {
-		// 	let currentItem = itemList[index]
-		// 	currentItem.count = 1
-		// 	this.setState({itemList})
-		// }
 		let addedItem = cartItem;
-		let cart = checkOutCart;
+		let cart = _.cloneDeep(checkOutCart);
 		cart.push(addedItem);
-		this.setState({ checkOutCart: cart });		
+
+		this.setState({ 
+			checkOutCart: cart, 
+		});	
 	}
 
 	//Shop Page

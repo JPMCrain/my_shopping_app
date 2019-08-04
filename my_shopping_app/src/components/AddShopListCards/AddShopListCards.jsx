@@ -49,7 +49,6 @@ class AddShopListCards extends Component {
 						<div className={styles.cardsWrapper}>
 							{
 								category.items.map((item, index) => {
-									console.log(item)
 									return (
 										<ItemCard
 											key={index}

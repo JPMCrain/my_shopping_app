@@ -45,7 +45,7 @@ class Carousel extends Component {
 							e.preventDefault();
 							e.stopPropagation();
 							let cartItem = itemListRecieved[currentIndex];
-							this.props.checkOutCart(cartItem)
+							this.props.checkOutCart(cartItem, currentIndex)
 						}}
 					/>
 
