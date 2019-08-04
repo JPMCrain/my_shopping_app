@@ -16,9 +16,6 @@ class AddShopListCards extends Component {
 
 	render() {
 		const { category, filters } = this.props;
-
-		// const selectedItem = category.items[filters.itemKey];
-
 		const viewSelectedClass = filters.isItemViewPannelOpen ? styles.viewSelectedItemActive : styles.viewSelectedItem;
 
 		return (
@@ -38,9 +35,11 @@ class AddShopListCards extends Component {
 									onItemClick={() => {
 										this.onClickFilter('isItemViewPannelOpen', undefined)
 									}}
+
 									addToCartCount={this.props.addToCartCount}
+									handleCartCountOnChange={this.props.handleCartCountOnChange}
+
 									addToCart={this.props.addToCart}
-									handleOnChange={this.handleOnChange}
 									increaseCount={this.props.increaseCount}
 									decreaseCount={this.props.decreaseCount}
 									checkOutCart={this.props.checkOutCart}
@@ -60,16 +59,28 @@ class AddShopListCards extends Component {
 											onItemClick={() => {
 												this.onClickFilter('isItemViewPannelOpen', index)
 											}}
+
 											addToCartCount={this.props.addToCartCount}
+											handleCartCountOnChange={this.props.handleCartCountOnChange}
+
+											value={item.count}
 											addToCart={this.props.addToCart}
-											handleOnChange={this.handleOnChange}
-											increaseCount={this.props.increaseCount}
-											decreaseCount={this.props.decreaseCount}
+											increaseCount={(e) => {
+												e.preventDefault();
+												e.stopPropagation();
+												console.log(index)
+												this.props.increaseCount(index);
+											}}
+											decreaseCount={(e) => {
+												e.preventDefault();
+												e.stopPropagation();
+												this.props.decreaseCount(index);
+											}}
 											checkOutCart={(e) => {
 												e.preventDefault();
 												e.stopPropagation();
 												let cartItem = category.items[index];
-												this.props.checkOutCart(cartItem)
+												this.props.checkOutCart(cartItem, index)
 											}}
 										/>
 									)

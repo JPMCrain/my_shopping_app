@@ -23,9 +23,24 @@ class Carousel extends Component {
 						description={itemListRecieved[currentIndex].description}
 						price={itemListRecieved[currentIndex].price}
 						image={itemListRecieved[currentIndex].imagelink}
-						handleCartCountOnChange={this.props.handleCartCountOnChange}
-						increaseCount={this.props.increaseCount}
-						decreaseCount={this.props.decreaseCount}
+						value={itemListRecieved[currentIndex].count}
+						handleCartCountOnChange={(e) => {
+							e.preventDefault();
+							e.stopPropagation();
+							this.props.handleCartCountOnChange()
+						}}
+
+
+						increaseCount={(e) => {
+							e.preventDefault();
+							e.stopPropagation();
+							this.props.increaseCount(currentIndex);
+						}}
+						decreaseCount={(e) => {
+							e.preventDefault();
+							e.stopPropagation();
+							this.props.decreaseCount(currentIndex);
+						}}
 						addToCartCount={this.props.addToCartCount}
 						addToCart={this.props.addToCart}
 

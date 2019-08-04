@@ -7,6 +7,9 @@ import { Link } from "react-router-dom"
 
 class Header extends Component {
 	render() {
+		const { home, shop } = this.props
+		const goTab = home === true ? styles.goTabActive : styles.goTab
+		const goTabShop = shop === true ? styles.goTabActive : styles.goTab
 		return (
 			<div>
 				<header className={styles.headerWrapper}>
@@ -15,10 +18,10 @@ class Header extends Component {
 					</div>
 					<div className={styles.headingTabs}>
 						<Link to='/'>
-							<button className={styles.goTab}>Home</button>
+							<button onClick={this.props.linkOnclick} className={goTab}>Home</button>
 						</Link>
 						<Link to='/shop'>
-							<button className={styles.goTab}>Go to Shop</button>
+							<button onClick={this.props.linkOnclick} className={goTabShop}>Go to Shop</button>
 						</Link>
 						<Link to='/checkout'>
 							<button className={styles.goToCartTab}>

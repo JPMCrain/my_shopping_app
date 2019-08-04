@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './index.module.css';
 
 import AddToCart from '../AddToCart/AddToCart';
-// import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
+import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 
 class ItemCard extends Component {
 
@@ -20,6 +20,12 @@ class ItemCard extends Component {
 				</div>
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>
+						<AddtoCartCount
+							addToCartCount={this.props}
+							handleCartCountOnChange={this.props.handleCartCountOnChange}
+							increaseCount={this.props.increaseCount}
+							decreaseCount={this.props.decreaseCount}
+						/>
 					</div>
 					<div className={styles.itemAddToCart}>
 						<AddToCart

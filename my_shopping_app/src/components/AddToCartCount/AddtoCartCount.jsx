@@ -3,22 +3,27 @@ import styles from './index.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
-// const validate = (value, errMessage, pattern) => {
-// 	errMessage = "Must contain 2-3 digits"
-// 	const valid = new RegExp(pattern).test(value);
-// 	return valid ? value : errMessage;
-// };
-
 class AddtoCartCount extends Component {
-	onQuantityChange(value) {
-		// const error = validate(value, errMessage, pattern);
-		this.props.handleCartCountOnChange(value);
+
+	getValue() {
+		let value = 1;
+		return value
+		// if (this.props.addToCartCount.filteredCategory === undefined) {
+		// 	let homeItems = this.props.addToCartCount.itemList;
+		// 	let homeItemIndex = this.props.addToCartCount.currentIndex;
+		// 	value = homeItems[homeItemIndex].count
+		// 	return value
+		// } else if (value === undefined) {
+		// 	let filteredItems = this.props.addToCartCount.addToCartCount.filteredCategory.items;
+		// 	let filteredItemIndex = this.props.addToCartCount.index;
+		// 	value = filteredItems[filteredItemIndex].count
+		// 	return value
+		// }
 	}
 
 	render() {
-		const { addToCartCount } = this.props
-		const itemListRecieved = addToCartCount.itemList
-		const currentIndex = addToCartCount.currentIndex
+		console.log('props for count');
+		console.log(this.props);
 
 		return (
 			<div className={styles.wrapper}>
@@ -29,38 +34,22 @@ class AddtoCartCount extends Component {
 						name="number"
 						className={styles.input}
 						message={"Add items 1-99 at a time!"}
+						value={this.getValue()}
 						type="numer"
 						min='1'
 						max='99'
-						value={itemListRecieved[currentIndex].count}
-						onChange={(e) => {
-							const target = e.target;
-							const value = target.value;
-							const pattern = target.pattern;
-							const message = target.message;
-							const min = target.min;
-							const max = target.max;
-							this.onQuantityChange(value, message, pattern, min, max)
-						}}  {...this.props} />
+						onChange={this.props.handleCartCountOnChange} />
 				</div>
 				<div className={styles.button__wrapper}>
 					<button
-						onClick={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							this.props.increaseCount();
-						}}
+						onClick={this.props.increaseCount}
 						className={styles.input__button}>
 						<div className={styles.icon}>
 							<FontAwesomeIcon icon={faChevronUp} />
 						</div>
 					</button>
 					<button className={styles.input__button}
-						onClick={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							this.props.decreaseCount();
-						}}>
+						onClick={this.props.decreaseCount}>
 						<div className={styles.icon}>
 							<FontAwesomeIcon icon={faChevronDown} />
 

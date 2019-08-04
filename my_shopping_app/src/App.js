@@ -14,6 +14,8 @@ class App extends Component {
   constructor(props) {
 		super(props)
 		this.state = {
+			Home: true,
+			Shop: false,
 			catogoryLists: jsonData,
 			openIndex: null,
 			
@@ -99,37 +101,65 @@ class App extends Component {
 	
 	//Number Input for Count
 	handleCartCountOnChange(value) {
-		const { itemList, currentIndex} = this.state;
-		let currentItem = itemList[currentIndex]
-		value = parseInt(value)
-		if(isNaN(value)) {
-			currentItem.count = "";
-		} else {
-			currentItem.count = value;
-		}
-		this.setState({itemList})
+		// const { itemList, currentIndex} = this.state;
+		// let currentItem = itemList[currentIndex]
+		// value = parseInt(value)
+		// if(isNaN(value)) {
+		// 	currentItem.count = "";
+		// } else {
+		// 	currentItem.count = value;
+		// }
+		// this.setState({itemList})
 	};
 
   //Number Input for Count
-	increaseCount(){
-		const { itemList, currentIndex } = this.state;
-		let currentItem = itemList[currentIndex]
-		currentItem.count++
-		this.setState({itemList})
+	increaseCount(index){
+		console.log(index)
+		const { filteredCategory, itemList } = this.state;
+		if(filteredCategory){
+			let currentItem = filteredCategory.items[index]
+			++currentItem.count
+			this.setState({filteredCategory})
+		} else {
+			let currentItem = itemList[index]
+			currentItem.count++
+			this.setState({itemList})
+		}
+
 	}
 	//Number Input for Count
-	decreaseCount(){
-		const { itemList, currentIndex } = this.state;
-		let currentItem = itemList[currentIndex]
-			if(currentItem.count === 1)	{
+	decreaseCount(index){
+		const { filteredCategory, itemList } = this.state;
+		if(filteredCategory){
+			let currentItem = filteredCategory.items[index]
+			if(currentItem.count === 1){
 				return
 			}
-		currentItem.count--
-		this.setState({itemList})
+			--currentItem.count
+			this.setState({filteredCategory})
+		} else {
+			let currentItem = itemList[index]
+			if(currentItem.count === 1){
+				return
+			}
+			--currentItem.count
+			this.setState({itemList})
+		}
+
 	}
 
-	checkOutCart(cartItem) {
+	checkOutCart(cartItem, index) {
 		const { checkOutCart } = this.state;
+		// const { filteredCategory, itemList } = this.state;
+		// // if(filteredCategory){
+		// 	let currentItem = filteredCategory.items[index]
+		// 	currentItem.count = 1
+		// 	this.setState({filteredCategory})
+		// } else {
+		// 	let currentItem = itemList[index]
+		// 	currentItem.count = 1
+		// 	this.setState({itemList})
+		// }
 		let addedItem = cartItem;
 		let cart = checkOutCart;
 		cart.push(addedItem);
@@ -205,16 +235,26 @@ class App extends Component {
 		});
 		filteredCategory.items = newfilteredCategory;
 	}
-	
+
+	linkOnclick(){	
+		let { Home, Shop } = this.state;
+		Home = !Home;
+		Shop = !Shop;
+		this.setState({Home, Shop})
+	}
+
   render() {
-		const { checkOutCart, filteredCategory, filters, catogoryLists, openIndex } = this.state
-		console.log(this.state.filters.itemKey);
+		const { Home, Shop, checkOutCart, filteredCategory, filters, catogoryLists, openIndex } = this.state
+
 		return (
       <div className="App">
       <Router>
         <Route exact path='/' component={()=> {
           return (
 						<HomePage
+							linkOnclick={this.linkOnclick.bind(this)}
+							home={Home}
+							shop={Shop}
 							itemState = {this.state}
 							goToPrevSlide={this.goToPrevSlide}
 							goToNextSlide={this.goToNextSlide}
@@ -231,6 +271,9 @@ class App extends Component {
           }}/>
         <Route path='/shop' component={()=>{
 					return <ShopPage 
+						linkOnclick={this.linkOnclick.bind(this)}
+						home={Home}
+						shop={Shop}
 						itemState = {this.state}
 						filteredCategory={filteredCategory}
 						catogoryLists={catogoryLists}

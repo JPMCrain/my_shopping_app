@@ -9,17 +9,21 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div className={styles.Wrapper}>
-				<Header />
+				<Header
+					home={this.props.home}
+					shop={this.props.shop}
+					linkOnclick={this.props.linkOnclick}
+				/>
 				<Carousel
 					itemList={this.props.itemState}
 					goToPrevSlide={this.props.goToPrevSlide}
 					goToNextSlide={this.props.goToNextSlide}
+
 					addToCartCount={this.props.addToCartCount}
+					handleCartCountOnChange={this.props.handleCartCountOnChange}
 					addToCart={this.props.addToCart}
 
 					checkOutCart={this.props.checkOutCart}
-
-					handleCartCountOnChange={this.props.handleCartCountOnChange}
 					increaseCount={this.props.increaseCount}
 					decreaseCount={this.props.decreaseCount}
 				/>

@@ -15,7 +15,10 @@ class ShopPage extends Component {
 
 		return (
 			<div className={styles.Wrapper}>
-				<Header />
+				<Header
+					linkOnclick={this.props.linkOnclick}
+					home={this.props.home}
+					shop={this.props.shop} />
 				<div className={styles.midWrapper}>
 					<div className={styles.listWrapper}>
 						<CatogoryList
@@ -44,6 +47,7 @@ class ShopPage extends Component {
 									addToCartCount={this.props}
 
 									addToCart={this.props.addToCart}
+									handleCartCountOnChange={this.props.handleCartCountOnChange}
 
 									increaseCount={this.props.increaseCount}
 									decreaseCount={this.props.decreaseCount}
