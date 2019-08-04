@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import styles from './index.module.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 class CartItem extends Component {
 	render() {
-		console.log(this.props.total)
 		return (
 			<div className={styles.cartItem__wrapper}>
 				<div>
@@ -16,13 +18,17 @@ class CartItem extends Component {
 					<p>${this.props.price}</p>
 				</div>
 				<div className={styles.cartCellNumber__wrapper}>
-
-				</div>
-				<div className={styles.cartCellNumber__wrapper}>
 					<p>X {this.props.count}</p>
 				</div>
 				<div className={styles.cartCellNumber__wrapper}>
 					<p>$ {this.props.total}</p>
+				</div>
+				<div className={styles.cartCellNumber__wrapper}>
+					<div className={styles.removeItem__wrapper}>
+						<button className={styles.removeItem}>
+							<FontAwesomeIcon icon={faTrash} />
+						</button>
+					</div>
 				</div>
 
 			</div>

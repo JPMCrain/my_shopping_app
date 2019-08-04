@@ -1,6 +1,8 @@
 .cartItem__wrapper {
 	display: flex;
 	height: 40px;
+	color: #782644;
+	font-weight: 700;
 	background-color:  #e8d19d;
 }
 

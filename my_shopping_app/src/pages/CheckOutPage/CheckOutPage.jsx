@@ -8,9 +8,28 @@ import CheckOutForm from '../../components/CheckOutForm/CheckOutForm';
 
 class CheckOutPage extends Component {
 
+
+	totalOfAllItems() {
+		const { checkOutCartState } = this.props
+		let total = '0.00'
+		if (checkOutCartState.length > 0) {
+			function amount(item) {
+				return item.total;
+			}
+
+			function sum(prev, next) {
+				return prev + next;
+			}
+
+			let total = checkOutCartState.map(amount).reduce(sum);
+
+			return parseFloat(total)
+		}
+		return total
+	}
+
 	render() {
 		const { checkOutCartState } = this.props
-		console.log(checkOutCartState)
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
@@ -21,9 +40,7 @@ class CheckOutPage extends Component {
 								name="Product Name"
 								price="Price"
 								count="Count"
-								image="Image"
 								total="Total"
-								counter="Counter"
 							/>
 							{
 								checkOutCartState.map((item, index) => {
@@ -35,12 +52,13 @@ class CheckOutPage extends Component {
 											count={item.count}
 											image={item.imagelink}
 											total={item.total}
-											stock={item.stock}
 										/>)
 								})
 							}
 						</div>
-
+						<div className={styles.totalOfAllItems}>
+							Total Sum:	$	{this.totalOfAllItems()}
+						</div>
 					</div>
 					<div className={styles.midWrapper__section2}>
 						<CheckOutForm />
