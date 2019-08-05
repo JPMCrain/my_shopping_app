@@ -123,7 +123,7 @@ class App extends Component {
 			
 			++currentItem.count
 			
-			let total = currentItem.count * currentItem.price
+			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
 			currentItem.total = total
 			this.setState({filteredCategory})
 		} else {
@@ -131,7 +131,7 @@ class App extends Component {
 			
 			currentItem.count++
 
-			let total = currentItem.count * currentItem.price
+			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
 			currentItem.total = total
 			this.setState({itemList})
 		}
@@ -147,7 +147,7 @@ class App extends Component {
 			}
 			--currentItem.count
 		
-			let total = currentItem.count * currentItem.price
+			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
 			currentItem.total = total
 
 			this.setState({filteredCategory})
@@ -159,7 +159,7 @@ class App extends Component {
 
 			--currentItem.count
 
-			let total = Math.round(currentItem.count * currentItem.price)
+			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
 			currentItem.total = total
 
 			this.setState({itemList})
@@ -176,6 +176,10 @@ class App extends Component {
 		this.setState({ 
 			checkOutCart: cart, 
 		});	
+	}
+
+	removedItem(newCheckoutCart){
+		this.setState({checkOutCart: newCheckoutCart})
 	}
 
 	//Shop Page
@@ -306,7 +310,9 @@ class App extends Component {
 						decreaseCount={this.decreaseCount.bind(this)}/> 
           }}/>
         <Route path='/checkout' component={()=>{
-          return <CheckOutPage checkOutCartState = {this.state.checkOutCart}/>
+					return <CheckOutPage 
+					removedItem={this.removedItem.bind(this)}
+					checkOutCartState = {this.state.checkOutCart}/>
           }}/>       
       </Router>
     </div>

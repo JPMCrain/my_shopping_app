@@ -25,7 +25,9 @@ class CartItem extends Component {
 				</div>
 				<div className={styles.cartCellNumber__wrapper}>
 					<div className={styles.removeItem__wrapper}>
-						<button className={styles.removeItem}>
+						<button
+							onClick={this.props.removeItem}
+							className={styles.removeItem}>
 							<FontAwesomeIcon icon={faTrash} />
 						</button>
 					</div>

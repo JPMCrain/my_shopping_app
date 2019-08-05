@@ -23,13 +23,23 @@ class CheckOutPage extends Component {
 
 			let total = checkOutCartState.map(amount).reduce(sum);
 
-			return parseFloat(total)
+			return parseFloat(total).toFixed(2)
 		}
 		return total
 	}
 
+	deleteItem(index) {
+		const { checkOutCartState } = this.props
+		if (checkOutCartState.length > 0) {
+			checkOutCartState.splice(index, 1)
+		}
+		this.totalOfAllItems()
+		this.props.removedItem(checkOutCartState)
+	}
+
 	render() {
 		const { checkOutCartState } = this.props
+		console.log(checkOutCartState)
 		return (
 			<div className={styles.Wrapper}>
 				<Header />
@@ -44,6 +54,7 @@ class CheckOutPage extends Component {
 							/>
 							{
 								checkOutCartState.map((item, index) => {
+									console.log(item + index)
 									return (
 										<CartItem
 											key={index}
@@ -52,6 +63,9 @@ class CheckOutPage extends Component {
 											count={item.count}
 											image={item.imagelink}
 											total={item.total}
+											removeItem={() => {
+												this.deleteItem(index)
+											}}
 										/>)
 								})
 							}
@@ -61,7 +75,9 @@ class CheckOutPage extends Component {
 						</div>
 					</div>
 					<div className={styles.midWrapper__section2}>
-						<CheckOutForm />
+						<CheckOutForm
+							checkOutCartState={checkOutCartState}
+						/>
 					</div>
 				</div>
 				<Footer />
