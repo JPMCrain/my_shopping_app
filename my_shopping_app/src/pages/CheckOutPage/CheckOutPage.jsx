@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styles from './index.module.css';
-import Header from '../../components/Header/Header.jsx';
-import Footer from '../../components/Footer/Footer.jsx';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import CartItem from '../../components/CartItem/CartItem';
 import CartItemHeader from '../../components/CartItemHeader/CartItemHeader';
 import CheckOutForm from '../../components/CheckOutForm/CheckOutForm';
@@ -11,6 +11,7 @@ class CheckOutPage extends Component {
 
 	totalOfAllItems() {
 		const { checkOutCartState } = this.props
+		console.log(checkOutCartState)
 		let total = '0.00'
 		if (checkOutCartState.length > 0) {
 			function amount(item) {
@@ -76,6 +77,8 @@ class CheckOutPage extends Component {
 					</div>
 					<div className={styles.midWrapper__section2}>
 						<CheckOutForm
+							handleOnchange={this.props.handleOnchange}
+							handleSubmit={this.props.handleSubmit}
 							checkOutCartState={checkOutCartState}
 						/>
 					</div>

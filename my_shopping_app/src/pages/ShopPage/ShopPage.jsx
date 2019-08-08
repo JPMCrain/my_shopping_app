@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styles from './index.module.css';
-import Header from '../../components/Header/Header.jsx';
+import Header from '../../components/Header/Header';
 
 import Footer from '../../components/Footer/Footer.jsx';
 import CatogoryList from '../../components/CatogoryList/CatogoryList';

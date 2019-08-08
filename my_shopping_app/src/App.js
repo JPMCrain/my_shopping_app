@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 import './App.css'
 import { BrowserRouter as Router, Route } from "react-router-dom"
@@ -42,16 +43,44 @@ class App extends Component {
 				}
 			},
 			checkOutCart: [],
+
+			name: '',
+			email: '',
+			number: '',
+			address: '',
+			message: '',
     }
     
 		this.goToNextSlide = this.goToNextSlide.bind(this);
 		this.goToPrevSlide = this.goToPrevSlide.bind(this);
+		this.handleOnchange = this.handleOnchange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this)
 	
 	}
 
 	componentDidMount() {
 		this.getItems();
 	}
+
+	handleOnchange = e => {
+		this.setState({ [e.target.name]: e.target.value })
+	}
+
+	async handleSubmit(e) {
+		e.preventDefault()
+
+		const { name, email, number, address, message } = this.state;
+		const form =	await axios.post('/api/form', {
+			name,
+			email,
+			number,
+			address,
+			message
+		})
+		console.log(form)
+
+	}
+
 	//Home Page
 	getItems() {
 		let itemDataArray = jsonData;
@@ -260,8 +289,8 @@ class App extends Component {
 	}
 
   render() {
-		const { Home, Shop, checkOutCart, filteredCategory, filters, catogoryLists, openIndex } = this.state
-
+		const {name, email, number, address, message , Home, Shop, checkOutCart, filteredCategory, filters, catogoryLists, openIndex } = this.state
+		console.log(name, email, number, address, message )
 		return (
       <div className="App">
       <Router>
@@ -311,6 +340,8 @@ class App extends Component {
           }}/>
         <Route path='/checkout' component={()=>{
 					return <CheckOutPage 
+					handleSubmit = {this.handleSubmit}
+					handleOnchange = {this.handleOnchange}
 					removedItem={this.removedItem.bind(this)}
 					checkOutCartState = {this.state.checkOutCart}/>
           }}/>       
