@@ -31,6 +31,7 @@ class Carousel extends Component {
 						increaseCount={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
+							console.log(currentIndex)
 							this.props.increaseCount(currentIndex);
 						}}
 						decreaseCount={(e) => {

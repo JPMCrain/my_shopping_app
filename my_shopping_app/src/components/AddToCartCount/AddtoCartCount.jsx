@@ -4,6 +4,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 class AddtoCartCount extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			number: '',
+			errorMsg: ''
+		}
+		this.handleOnChangeAddToCartCount = this.handleOnChangeAddToCartCount.bind(this)
+
+	}
+
+	handleOnChangeAddToCartCount(e) {
+		e.preventDefault();
+		e.preventDefault();
+		const { name, value } = e.target
+
+		if (value.length < 0) {
+			this.setState({ errorMsg: "Please enter 1-99" })
+		} else {
+			this.setState({ errorMsg: "" })
+		}
+		this.setState({ [name]: value })
+	}
 
 	render() {
 		return (
@@ -19,7 +41,7 @@ class AddtoCartCount extends Component {
 						type="numer"
 						min='1'
 						max='99'
-						onChange={this.props.handleCartCountOnChange} />
+						onChange={this.handleOnChangeAddToCartCount} />
 				</div>
 				<div className={styles.button__wrapper}>
 					<button

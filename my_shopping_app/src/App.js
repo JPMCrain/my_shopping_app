@@ -146,8 +146,8 @@ class App extends Component {
 
   //Number Input for Count
 	increaseCount(index){
-		const { filteredCategory, itemList } = this.state;
-		if(filteredCategory){
+		const { filteredCategory, itemList, Home, Shop} = this.state;
+		if(Shop){
 			let currentItem = filteredCategory.items[index]
 			
 			++currentItem.count
@@ -155,7 +155,7 @@ class App extends Component {
 			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
 			currentItem.total = total
 			this.setState({filteredCategory})
-		} else {
+		} else if (Home) {
 			let currentItem = itemList[index]
 			
 			currentItem.count++
@@ -168,8 +168,8 @@ class App extends Component {
 	}
 	//Number Input for Count
 	decreaseCount(index){
-		const { filteredCategory, itemList } = this.state;
-		if(filteredCategory){
+		const { filteredCategory, itemList, Home, Shop } = this.state;
+		if(Shop){
 			let currentItem = filteredCategory.items[index]
 			if(currentItem.count === 1){
 				return
@@ -180,7 +180,7 @@ class App extends Component {
 			currentItem.total = total
 
 			this.setState({filteredCategory})
-		} else {
+		} else if(Home){
 			let currentItem = itemList[index]
 			if(currentItem.count === 1){
 				return
@@ -197,11 +197,13 @@ class App extends Component {
 	}
 
 	checkOutCart(cartItem, index) {
-		const { checkOutCart } = this.state;
+		const { checkOutCart, Home, Shop } = this.state;
 		let addedItem = cartItem;
 		let cart = _.cloneDeep(checkOutCart);
 		cart.push(addedItem);
-
+		if(Home){
+			
+		}
 		this.setState({ 
 			checkOutCart: cart, 
 		});	
