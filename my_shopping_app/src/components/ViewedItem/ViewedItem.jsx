@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import AddToCart from '../AddToCart/AddToCart';
 import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 import store from '../../data';
+import _ from 'lodash'
 
 function ViewedItem(props) {
 	return (
@@ -30,15 +31,18 @@ function ViewedItem(props) {
 				<div className={styles.viewedItem__addToCart}>
 					<div className={styles.itemQuantity}>
 						<AddtoCartCount
-							quantity={props.quantity}
-							onQuantityChange={props.onQuantityChange} />
+							ref={(ref) => this.cartCountComponent = ref} />
 					</div>
 					<div className={styles.addToCart}>
 						<AddToCart
 							addToCart={() => {
 								const cart = store.getValue('cart', []);
-								cart.push(this.props.item);
+								const cartItem = _.cloneDeep(this.props.item)
+								const { quantity } = this.cartCountComponent.state;
+								cartItem.count = quantity;
+								cart.push(cartItem);
 								store.notifyChange('cart', cart);
+								this.setState({});
 							}} />
 					</div>
 				</div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './index.module.css';
 import store from '../../data'
+import _ from 'lodash'
 
 import AddToCart from '../AddToCart/AddToCart';
 import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
@@ -22,17 +23,20 @@ class ItemCard extends Component {
 				<div className={styles.AddToCartWrapper}>
 					<div className={styles.itemQuantity}>
 						<AddtoCartCount
-							index={this.props.index}
-							quantity={this.props.quantity}
-							onQuantityChange={this.props.onQuantityChange}
+
+							ref={(ref) => this.cartCountComponent = ref}
 						/>
 					</div>
 					<div className={styles.itemAddToCart}>
 						<AddToCart
 							addToCart={() => {
 								const cart = store.getValue('cart', []);
-								cart.push(this.props.item);
+								const cartItem = _.cloneDeep(this.props.item)
+								const { quantity } = this.cartCountComponent.state;
+								cartItem.count = quantity;
+								cart.push(cartItem);
 								store.notifyChange('cart', cart);
+								this.setState({});
 							}} />
 					</div>
 				</div>

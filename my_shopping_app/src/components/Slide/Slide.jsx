@@ -3,6 +3,7 @@ import styles from './index.module.css';
 import AddToCart from '../AddToCart/AddToCart';
 import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
 import store from '../../data'
+import _ from 'lodash'
 
 class Slide extends Component {
 
@@ -22,17 +23,19 @@ class Slide extends Component {
 					<p className={styles.price}>${this.props.price}</p>
 					<div className={styles.AddtoCart__wrapper}>
 						<div className={styles.AddtoCartCount}>
-							{/* <AddtoCartCount
-								index={this.props.itemIndex}
-								quantity={this.props.quantity}
-								onQuantityChange={this.props.onQuantityChange}
-							/> */}
+							<AddtoCartCount
+								ref={(ref) => this.cartCountComponent = ref}
+							/>
 						</div>
 						<div className={styles.AddtoCart}>
 							<AddToCart addToCart={() => {
 								const cart = store.getValue('cart', []);
-								cart.push(this.props.item);
+								const cartItem = _.cloneDeep(this.props.item)
+								const { quantity } = this.cartCountComponent.state;
+								cartItem.count = quantity;
+								cart.push(cartItem);
 								store.notifyChange('cart', cart);
+								this.setState({});
 							}} />
 						</div>
 					</div>

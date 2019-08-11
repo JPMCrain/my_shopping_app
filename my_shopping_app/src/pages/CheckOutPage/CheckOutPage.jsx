@@ -12,9 +12,8 @@ class CheckOutPage extends Component {
 
 	totalOfAllItems() {
 		const cart = store.getValue('cart', []);
-
 		function amount(item) {
-			return item.total;
+			return item.price * item.count;
 		}
 
 		function sum(prev, next) {
@@ -62,7 +61,7 @@ class CheckOutPage extends Component {
 											price={item.price}
 											count={item.count}
 											image={item.imagelink}
-											total={item.total}
+											total={Math.round(item.price * item.count).toFixed(2)}
 											removeItem={() => {
 												this.deleteCartItem(itemIndex)
 											}}

@@ -45,8 +45,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		this.getItems();	
-		store.listen('cart', this.onCartChange);
+		this.getItems();
 	}
 
 	//Home Page
@@ -105,46 +104,10 @@ class App extends Component {
 		const { currentItems, linkName } = this.state;
 		console.log(currentItems)
 		console.log(linkName)
-		if(linkName === 'home'){
-			let currentItem = currentItems[index]
-			currentItem.count = quantity;
-			currentItem.total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-			this.setState({currentItems})
-		}
-		if(linkName === 'shop'){
-			let currentItem = currentItems.items[index]
-			currentItem.count = quantity;
-			currentItem.total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-			this.setState({currentItems})
-		}	
+		let currentItem = currentItems[index]
+		currentItem.count = quantity;
+		this.setState({currentItems})
 	};
-
-	onCartChange(cart) {
-		console.log(cart)
-		// const { currentItems, checkOutCart, linkName } = this.state;
-		// let addedItem = cartItem;
-		// let cart = _.cloneDeep(checkOutCart);
-		// cart.push(addedItem);
-		// if(linkName === 'home'){
-		// 	currentItem.count = 1;
-		// 	let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-		// 	currentItem.total = total
-		// 	this.setState({ 
-		// 		currentItems,
-		// 		checkOutCart: cart
-		// 	});
-		// }
-		// if(linkName === 'shop'){
-		// 	let currentItem = currentItems.items[index];
-		// 	currentItem.count = 1;
-		// 	let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-		// 	currentItem.total = total
-		// 	this.setState({ 
-		// 		currentItems,
-		// 		checkOutCart: cart
-		// 	});
-		// }
-	}
 
 	removedItem(newCheckoutCart){
 		this.setState({checkOutCart: newCheckoutCart})
@@ -169,7 +132,7 @@ class App extends Component {
 		const filteredCategory = this.filterCategoryItems(selectedCategory, filters);
 		this.setState({ selectedCategory, 
 										filteredCategory, 
-										currentItems: filteredCategory  });
+										currentItems: filteredCategory.items  });
 	}
 
 

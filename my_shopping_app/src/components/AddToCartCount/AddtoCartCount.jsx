@@ -26,7 +26,6 @@ class AddtoCartCount extends Component {
 	handleQuantityChange(quantity) {
 		if (!(quantity < 0 || quantity > 99)) {
 			this.setState({ quantity })
-			this.props.onQuantityChange(quantity, this.state.index)
 		}
 	}
 
@@ -55,7 +54,6 @@ class AddtoCartCount extends Component {
 	render() {
 		return (
 			<div className={styles.wrapper}>
-
 				<div className={styles.input__wrapper}>
 					<input
 						pattern="^[0-9]{2,3}$"
