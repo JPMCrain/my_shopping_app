@@ -14,37 +14,39 @@ class AddShopListCards extends Component {
 		this.props.onFilterChange(filters);
 	}
 
+	renderViewedItem(item) {
+		const { filters } = this.props;
+		const viewSelectedClass = filters.isItemViewPannelOpen ? styles.viewSelectedItemActive : styles.viewSelectedItem;
+		return (
+			<div className={viewSelectedClass}>
+				<ViewedItem
+					image={item.imagelink}
+					name={item.name}
+					price={item.price}
+					description={item.description}
+					rating={item.rating}
+					stock={item.stock}
+					onItemClick={() => {
+						this.onClickFilter('isItemViewPannelOpen', undefined)
+					}}
+					quantity={item.count}
+					onQuantityChange={this.props.onQuantityChange}
+				/>
+			</div>
+		)
+	}
+
 	render() {
 		const { category, filters } = this.props;
-		const viewSelectedClass = filters.isItemViewPannelOpen ? styles.viewSelectedItemActive : styles.viewSelectedItem;
-
 		return (
 			<div>
 				{
 					category && category.items &&
 					<div className={styles.Wrapper}>
-						{filters && filters.isItemViewPannelOpen && category.items[filters.itemKey] &&
-							<div className={viewSelectedClass}>
-								<ViewedItem
-									image={category.items[filters.itemKey].imagelink}
-									name={category.items[filters.itemKey].name}
-									price={category.items[filters.itemKey].price}
-									description={category.items[filters.itemKey].description}
-									rating={category.items[filters.itemKey].rating}
-									stock={category.items[filters.itemKey].stock}
-									onItemClick={() => {
-										this.onClickFilter('isItemViewPannelOpen', undefined)
-									}}
-
-									addToCartCount={this.props.addToCartCount}
-									handleCartCountOnChange={this.props.handleCartCountOnChange}
-
-									addToCart={this.props.addToCart}
-									increaseCount={this.props.increaseCount}
-									decreaseCount={this.props.decreaseCount}
-									checkOutCart={this.props.checkOutCart}
-								/>
-							</div>
+						{filters &&
+							filters.isItemViewPannelOpen &&
+							category.items[filters.itemKey] &&
+							this.renderViewedItem(category.items[filters.itemKey])
 						}
 						<div className={styles.cardsWrapper}>
 							{
@@ -52,6 +54,7 @@ class AddShopListCards extends Component {
 									return (
 										<ItemCard
 											key={index}
+											item={item}
 											index={index}
 											image={item.imagelink}
 											name={item.name}
@@ -59,26 +62,8 @@ class AddShopListCards extends Component {
 											onItemClick={() => {
 												this.onClickFilter('isItemViewPannelOpen', index)
 											}}
-											value={item.count}
-											addToCartCount={this.props.addToCartCount}
-											handleCartCountOnChange={this.props.handleCartCountOnChange}
-											addToCart={this.props.addToCart}
-											increaseCount={(e) => {
-												e.preventDefault();
-												e.stopPropagation();
-												this.props.increaseCount(index);
-											}}
-											decreaseCount={(e) => {
-												e.preventDefault();
-												e.stopPropagation();
-												this.props.decreaseCount(index);
-											}}
-											checkOutCart={(e) => {
-												e.preventDefault();
-												e.stopPropagation();
-												let cartItem = category.items[index];
-												this.props.checkOutCart(cartItem, index)
-											}}
+											quantity={item.count}
+											onQuantityChange={this.props.onQuantityChange}
 										/>
 									)
 								})

@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import styles from './index.module.css';
 import AddToCart from '../AddToCart/AddToCart';
 import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
+import store from '../../data'
 
 class Slide extends Component {
+
 	render() {
 		return (
-
 			<div className={styles.slideWrapper}>
 				<div>
 					<img className={styles.slideImage} src={this.props.image} alt={this.props.key} />
@@ -21,18 +22,18 @@ class Slide extends Component {
 					<p className={styles.price}>${this.props.price}</p>
 					<div className={styles.AddtoCart__wrapper}>
 						<div className={styles.AddtoCartCount}>
-							<AddtoCartCount
-								value={this.props.value}
-								handleCartCountOnChange={this.props.handleCartCountOnChange}
-								addToCartCount={this.props.addToCartCount}
-								increaseCount={this.props.increaseCount}
-								decreaseCount={this.props.decreaseCount}
-							/>
+							{/* <AddtoCartCount
+								index={this.props.itemIndex}
+								quantity={this.props.quantity}
+								onQuantityChange={this.props.onQuantityChange}
+							/> */}
 						</div>
 						<div className={styles.AddtoCart}>
-							<AddToCart
-								addToCart={this.props.addToCart}
-								checkOutCart={this.props.checkOutCart} />
+							<AddToCart addToCart={() => {
+								const cart = store.getValue('cart', []);
+								cart.push(this.props.item);
+								store.notifyChange('cart', cart);
+							}} />
 						</div>
 					</div>
 

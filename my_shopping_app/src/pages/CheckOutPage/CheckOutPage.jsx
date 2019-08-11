@@ -5,45 +5,45 @@ import Footer from '../../components/Footer/Footer';
 import CartItem from '../../components/CartItem/CartItem';
 import CartItemHeader from '../../components/CartItemHeader/CartItemHeader';
 import CheckOutForm from '../../components/CheckOutForm/CheckOutForm';
+import store from '../../data'
 
 class CheckOutPage extends Component {
 
 
 	totalOfAllItems() {
-		const { checkOutCartState } = this.props
-		console.log(checkOutCartState)
-		let total = '0.00'
-		if (checkOutCartState.length > 0) {
-			function amount(item) {
-				return item.total;
-			}
+		const cart = store.getValue('cart', []);
 
-			function sum(prev, next) {
-				return prev + next;
-			}
+		function amount(item) {
+			return item.total;
+		}
 
-			let total = checkOutCartState.map(amount).reduce(sum);
+		function sum(prev, next) {
+			return prev + next;
+		}
 
+		if (cart.length > 0) {
+			let total = cart.map(amount).reduce(sum);
 			return parseFloat(total).toFixed(2)
 		}
-		return total
+
+		return '0.00'
 	}
 
-	deleteItem(index) {
-		const { checkOutCartState } = this.props
-		if (checkOutCartState.length > 0) {
-			checkOutCartState.splice(index, 1)
-		}
-		this.totalOfAllItems()
-		this.props.removedItem(checkOutCartState)
+	deleteCartItem(itemIndex) {
+		const cart = store.getValue('cart', []);
+		cart.splice(itemIndex, 1);
+		store.notifyChange('cart', cart);
+		this.setState({});
 	}
 
 	render() {
-		const { checkOutCartState } = this.props
-		console.log(checkOutCartState)
+		const cart = store.getValue('cart', []);
 		return (
 			<div className={styles.Wrapper}>
-				<Header />
+				<Header
+					linkName={this.props.linkName}
+					linkOnclick={this.props.linkOnclick}
+				/>
 				<div className={styles.midWrapper}>
 					<div className={styles.midWrapper__section1}>
 						<div className={styles.cart__Wrapper}>
@@ -54,18 +54,17 @@ class CheckOutPage extends Component {
 								total="Total"
 							/>
 							{
-								checkOutCartState.map((item, index) => {
-									console.log(item + index)
+								cart.map((item, itemIndex) => {
 									return (
 										<CartItem
-											key={index}
+											key={itemIndex}
 											name={item.name}
 											price={item.price}
 											count={item.count}
 											image={item.imagelink}
 											total={item.total}
 											removeItem={() => {
-												this.deleteItem(index)
+												this.deleteCartItem(itemIndex)
 											}}
 										/>)
 								})
@@ -79,7 +78,7 @@ class CheckOutPage extends Component {
 						<CheckOutForm
 							handleOnchange={this.props.handleOnchange}
 							handleSubmit={this.props.handleSubmit}
-							checkOutCartState={checkOutCartState}
+							checkOutCartState={cart}
 						/>
 					</div>
 				</div>

@@ -13,41 +13,20 @@ class Carousel extends Component {
 		const { itemList } = this.props
 		const itemListRecieved = itemList.itemList
 		const currentIndex = itemList.currentIndex
+		const item = itemListRecieved[currentIndex];
 		return (
 			<div className={styles.slideShow}>
 				<ArrowLeft goToPrevSlide={this.props.goToPrevSlide}></ArrowLeft>
 				{itemList.itemList.length > 0 &&
 					<Slide
-						name={itemListRecieved[currentIndex].name}
-						description={itemListRecieved[currentIndex].description}
-						price={itemListRecieved[currentIndex].price}
-						image={itemListRecieved[currentIndex].imagelink}
-						value={itemListRecieved[currentIndex].count}
-						handleCartCountOnChange={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							this.props.handleCartCountOnChange()
-						}}
-						increaseCount={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							console.log(currentIndex)
-							this.props.increaseCount(currentIndex);
-						}}
-						decreaseCount={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							this.props.decreaseCount(currentIndex);
-						}}
-						addToCartCount={this.props.addToCartCount}
-						addToCart={this.props.addToCart}
-
-						checkOutCart={(e) => {
-							e.preventDefault();
-							e.stopPropagation();
-							let cartItem = itemListRecieved[currentIndex];
-							this.props.checkOutCart(cartItem, currentIndex)
-						}}
+						name={item.name}
+						description={item.description}
+						price={item.price}
+						image={item.imagelink}
+						onQuantityChange={this.props.onQuantityChange}
+						quantity={item.count}
+						item={item}
+						itemIndex={currentIndex}
 					/>
 
 				}

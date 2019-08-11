@@ -4,27 +4,52 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 class AddtoCartCount extends Component {
+
 	constructor(props) {
 		super(props)
 		this.state = {
-			number: '',
-			errorMsg: ''
+			quantity: props.quantity || 1,
+			index: props.index || 0
 		}
-		this.handleOnChangeAddToCartCount = this.handleOnChangeAddToCartCount.bind(this)
-
+		this.handleQuantityOnInputChange = this.handleQuantityOnInputChange.bind(this)
+		this.handleQuantityArrowUpClick = this.handleQuantityArrowUpClick.bind(this)
+		this.handleQuantityArrowDownClick = this.handleQuantityArrowDownClick.bind(this)
 	}
 
-	handleOnChangeAddToCartCount(e) {
-		e.preventDefault();
-		e.preventDefault();
-		const { name, value } = e.target
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			quantity: nextProps.quantity || 1,
+			index: nextProps.index || 0
+		})
+	}
 
-		if (value.length < 0) {
-			this.setState({ errorMsg: "Please enter 1-99" })
-		} else {
-			this.setState({ errorMsg: "" })
+	handleQuantityChange(quantity) {
+		if (!(quantity < 0 || quantity > 99)) {
+			this.setState({ quantity })
+			this.props.onQuantityChange(quantity, this.state.index)
 		}
-		this.setState({ [name]: value })
+	}
+
+	handleQuantityOnInputChange(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		const { value } = e.target
+		const quantity = parseInt(value)
+		this.handleQuantityChange(quantity);
+	}
+
+	handleQuantityArrowUpClick(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		const { quantity } = this.state;
+		this.handleQuantityChange(quantity + 1);
+	}
+
+	handleQuantityArrowDownClick(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		const { quantity } = this.state;
+		this.handleQuantityChange(quantity - 1);
 	}
 
 	render() {
@@ -37,25 +62,24 @@ class AddtoCartCount extends Component {
 						name="number"
 						className={styles.input}
 						message={"Add items 1-99 at a time!"}
-						value={this.props.value}
+						value={this.state.quantity}
 						type="numer"
 						min='1'
 						max='99'
-						onChange={this.handleOnChangeAddToCartCount} />
+						onChange={this.handleQuantityOnInputChange} />
 				</div>
 				<div className={styles.button__wrapper}>
 					<button
-						onClick={this.props.increaseCount}
+						onClick={this.handleQuantityArrowUpClick}
 						className={styles.input__button}>
 						<div className={styles.icon}>
 							<FontAwesomeIcon icon={faChevronUp} />
 						</div>
 					</button>
 					<button className={styles.input__button}
-						onClick={this.props.decreaseCount}>
+						onClick={this.handleQuantityArrowDownClick}>
 						<div className={styles.icon}>
 							<FontAwesomeIcon icon={faChevronDown} />
-
 						</div>
 					</button>
 				</div>

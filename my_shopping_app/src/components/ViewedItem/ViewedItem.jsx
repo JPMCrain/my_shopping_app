@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from './index.module.css';
 import AddToCart from '../AddToCart/AddToCart';
-// import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
+import AddtoCartCount from '../AddToCartCount/AddtoCartCount';
+import store from '../../data';
 
 function ViewedItem(props) {
 	return (
@@ -28,21 +29,17 @@ function ViewedItem(props) {
 				</div>
 				<div className={styles.viewedItem__addToCart}>
 					<div className={styles.itemQuantity}>
-						{/* <AddtoCartCount
-							addToCartCount={props.addToCartCount}
-							addToCart={props.addToCart}
-							handleOnChange={props.handleOnChange}
-							increaseCount={props.increaseCount}
-							decreaseCount={props.decreaseCount} /> */}
+						<AddtoCartCount
+							quantity={props.quantity}
+							onQuantityChange={props.onQuantityChange} />
 					</div>
 					<div className={styles.addToCart}>
 						<AddToCart
-							addToCartCount={props.addToCartCount}
-							addToCart={props.addToCart}
-							handleOnChange={props.handleOnChange}
-							increaseCount={props.increaseCount}
-							decreaseCount={props.decreaseCount}
-							checkOutCart={props.checkOutCart} />
+							addToCart={() => {
+								const cart = store.getValue('cart', []);
+								cart.push(this.props.item);
+								store.notifyChange('cart', cart);
+							}} />
 					</div>
 				</div>
 			</div>

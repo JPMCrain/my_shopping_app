@@ -6,10 +6,16 @@ import { faCartArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom"
 
 class Header extends Component {
+
+	linkOnclick(linkName) {
+		console.log(linkName);
+		this.props.linkOnclick(linkName)
+	}
+
 	render() {
-		const { home, shop } = this.props
-		const goTab = home === true ? styles.goTabActive : styles.goTab
-		const goTabShop = shop === true ? styles.goTabActive : styles.goTab
+		const goTab = this.props.linkName === 'home' ? styles.goTabActive : styles.goTab
+		const goTabShop = this.props.linkName === 'shop' ? styles.goTabActive : styles.goTab
+		const goTabCheckout = this.props.linkName === 'checkout' ? styles.goToCartTabActive : styles.goToCartTab
 		return (
 			<div>
 				<header className={styles.headerWrapper}>
@@ -18,14 +24,29 @@ class Header extends Component {
 					</div>
 					<div className={styles.headingTabs}>
 						<Link to='/'>
-							<button onClick={this.props.linkOnclick} disabled={this.props.home} className={goTab}>Home</button>
+							<button
+								onClick={() => {
+									this.linkOnclick('home');
+								}}
+								disabled={this.props.home === 'home'}
+								className={goTab}>Home</button>
 						</Link>
 						<Link to='/shop'>
-							<button onClick={this.props.linkOnclick} disabled={this.props.shop} className={goTabShop}>Go to Shop</button>
+
+							<button
+								onClick={() => {
+									this.linkOnclick('shop');
+								}}
+								disabled={this.props.shop === 'shop'}
+								className={goTabShop}>Go to Shop</button>
 						</Link>
 						<Link to='/checkout'>
-							<button className={styles.goToCartTab}>
-								<Link to='/checkout' />
+							<button
+								onClick={() => {
+									this.linkOnclick('checkout');
+								}}
+								className={goTabCheckout}
+								disabled={this.props.checkout === 'checkout'}>
 								<FontAwesomeIcon className={styles.fontAwesomeIcon} icon={faCartArrowDown} />
 							</button>
 						</Link>

@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import CheckOutPage from './pages/CheckOutPage/CheckOutPage';
 import jsonData from './components/json_source/itemsdata.json';
+import store from './data'
 
 import _ from 'lodash'
 
@@ -15,14 +16,14 @@ class App extends Component {
   constructor(props) {
 		super(props)
 		this.state = {
-			Home: true,
-			Shop: false,
+			currentItems: [],
 			catogoryLists: jsonData,
 			openIndex: null,
-			
+			linkName : 'home',
 			itemList: [],
 			homeSliderList: [],
 			currentIndex: 0,
+			loading: true,
 
 			selectedCategory: undefined,
 			filteredCategory: undefined,
@@ -35,50 +36,17 @@ class App extends Component {
 				min: undefined,
 				max: undefined,
 			},
-			addToCart: {
-				cart: {
-					id: 1,
-					items: {},
-					count: 1
-				}
-			},
-			checkOutCart: [],
-
-			name: '',
-			email: '',
-			number: '',
-			address: '',
-			message: '',
+			cart: [],
     }
     
 		this.goToNextSlide = this.goToNextSlide.bind(this);
 		this.goToPrevSlide = this.goToPrevSlide.bind(this);
-		this.handleOnchange = this.handleOnchange.bind(this)
-		this.handleSubmit = this.handleSubmit.bind(this)
-	
+		this.onQuantityChange = this.onQuantityChange.bind(this)
 	}
 
 	componentDidMount() {
-		this.getItems();
-	}
-
-	handleOnchange = e => {
-		this.setState({ [e.target.name]: e.target.value })
-	}
-
-	async handleSubmit(e) {
-		e.preventDefault()
-
-		const { name, email, number, address, message } = this.state;
-		const form =	await axios.post('/api/form', {
-			name,
-			email,
-			number,
-			address,
-			message
-		})
-		console.log(form)
-
+		this.getItems();	
+		store.listen('cart', this.onCartChange);
 	}
 
 	//Home Page
@@ -107,7 +75,10 @@ class App extends Component {
 		}
 		this.setState({ 
 			itemList: randomFiveItems, 
-			homeSliderList: randomFiveItems,});
+			homeSliderList: randomFiveItems,
+			linkName: 'home',
+			currentItems: randomFiveItems,
+			loading: false,});
 	}
 
   goToNextSlide() {
@@ -130,83 +101,49 @@ class App extends Component {
 	}
 	
 	//Number Input for Count
-	handleCartCountOnChange(value) {
-		// const { itemList, currentIndex} = this.state;
-		// let currentItem = itemList[currentIndex]
-		// value = parseInt(value)
-		// if(isNaN(value)) {
-		// 	currentItem.count = "";
-		// } else {
-		// 	currentItem.count = value;
-		// }
-		// let total = currentItem.count * currentItem.price
-		// currentItem.total = total
-		// this.setState({itemList})
+	onQuantityChange(quantity, index) {
+		const { currentItems, linkName } = this.state;
+		console.log(currentItems)
+		console.log(linkName)
+		if(linkName === 'home'){
+			let currentItem = currentItems[index]
+			currentItem.count = quantity;
+			currentItem.total = Math.round(currentItem.count * currentItem.price).toFixed(2)
+			this.setState({currentItems})
+		}
+		if(linkName === 'shop'){
+			let currentItem = currentItems.items[index]
+			currentItem.count = quantity;
+			currentItem.total = Math.round(currentItem.count * currentItem.price).toFixed(2)
+			this.setState({currentItems})
+		}	
 	};
 
-  //Number Input for Count
-	increaseCount(index){
-		const { filteredCategory, itemList, Home, Shop} = this.state;
-		if(Shop){
-			let currentItem = filteredCategory.items[index]
-			
-			++currentItem.count
-			
-			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-			currentItem.total = total
-			this.setState({filteredCategory})
-		} else if (Home) {
-			let currentItem = itemList[index]
-			
-			currentItem.count++
-
-			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-			currentItem.total = total
-			this.setState({itemList})
-		}
-
-	}
-	//Number Input for Count
-	decreaseCount(index){
-		const { filteredCategory, itemList, Home, Shop } = this.state;
-		if(Shop){
-			let currentItem = filteredCategory.items[index]
-			if(currentItem.count === 1){
-				return
-			}
-			--currentItem.count
-		
-			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-			currentItem.total = total
-
-			this.setState({filteredCategory})
-		} else if(Home){
-			let currentItem = itemList[index]
-			if(currentItem.count === 1){
-				return
-			}
-
-			--currentItem.count
-
-			let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
-			currentItem.total = total
-
-			this.setState({itemList})
-		}
-
-	}
-
-	checkOutCart(cartItem, index) {
-		const { checkOutCart, Home, Shop } = this.state;
-		let addedItem = cartItem;
-		let cart = _.cloneDeep(checkOutCart);
-		cart.push(addedItem);
-		if(Home){
-			
-		}
-		this.setState({ 
-			checkOutCart: cart, 
-		});	
+	onCartChange(cart) {
+		console.log(cart)
+		// const { currentItems, checkOutCart, linkName } = this.state;
+		// let addedItem = cartItem;
+		// let cart = _.cloneDeep(checkOutCart);
+		// cart.push(addedItem);
+		// if(linkName === 'home'){
+		// 	currentItem.count = 1;
+		// 	let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
+		// 	currentItem.total = total
+		// 	this.setState({ 
+		// 		currentItems,
+		// 		checkOutCart: cart
+		// 	});
+		// }
+		// if(linkName === 'shop'){
+		// 	let currentItem = currentItems.items[index];
+		// 	currentItem.count = 1;
+		// 	let total = Math.round(currentItem.count * currentItem.price).toFixed(2)
+		// 	currentItem.total = total
+		// 	this.setState({ 
+		// 		currentItems,
+		// 		checkOutCart: cart
+		// 	});
+		// }
 	}
 
 	removedItem(newCheckoutCart){
@@ -230,7 +167,9 @@ class App extends Component {
 		const selectedCategory = jsonData[catogoryIndex].subcategories[index];
 		const { filters } = this.state;
 		const filteredCategory = this.filterCategoryItems(selectedCategory, filters);
-		this.setState({ selectedCategory, filteredCategory });
+		this.setState({ selectedCategory, 
+										filteredCategory, 
+										currentItems: filteredCategory  });
 	}
 
 
@@ -283,44 +222,59 @@ class App extends Component {
 		filteredCategory.items = newfilteredCategory;
 	}
 
-	linkOnclick(){	
-		let { Home, Shop } = this.state;
-		Home = !Home;
-		Shop = !Shop;
-		this.setState({Home, Shop})
+	linkOnclick(linkName) {	
+		const {filteredCategory, itemList} = this.state
+		if(linkName === 'home') {
+			this.setState({
+				linkName,
+				currentItems: itemList
+			})
+		} else if (linkName === 'shop'){
+			this.setState({
+				linkName,
+				currentItems: filteredCategory 
+			})
+		}else {
+			this.setState({
+				linkName,
+				currentItems: [], 
+			})
+		}
+		
 	}
 
   render() {
-		const {name, email, number, address, message , Home, Shop, checkOutCart, filteredCategory, filters, catogoryLists, openIndex } = this.state
-		console.log(name, email, number, address, message )
+	const { 
+		linkName, 
+		cart, 
+		filteredCategory, 
+		filters, 
+		catogoryLists, 
+		openIndex 
+	} = this.state
+	console.log(linkName)
+		if(this.state.loading) {
+			return 'Loading...'
+		} 
 		return (
       <div className="App">
       <Router>
         <Route exact path='/' component={()=> {
           return (
 						<HomePage
+							linkName={this.state.linkName}
 							linkOnclick={this.linkOnclick.bind(this)}
-							home={Home}
-							shop={Shop}
 							itemState = {this.state}
 							goToPrevSlide={this.goToPrevSlide}
 							goToNextSlide={this.goToNextSlide}
-							addToCartCount = {this.state}
-							addToCart = {checkOutCart}
-
-							checkOutCart={this.checkOutCart.bind(this)}	
-
-							handleCartCountOnChange={this.handleCartCountOnChange.bind(this)}
-							increaseCount={this.increaseCount.bind(this)}
-							decreaseCount={this.decreaseCount.bind(this)}
+							onQuantityChange={this.onQuantityChange}
 						/>
 					 );
           }}/>
         <Route path='/shop' component={()=>{
 					return <ShopPage 
+						linkName={this.state.linkName}
 						linkOnclick={this.linkOnclick.bind(this)}
-						home={Home}
-						shop={Shop}
 						itemState = {this.state}
 						filteredCategory={filteredCategory}
 						catogoryLists={catogoryLists}
@@ -331,21 +285,16 @@ class App extends Component {
 						onFilterChange={this.onFilterChange.bind(this)}
 						onCategorytItemClick={this.onCategorytItemClick.bind(this)}
 						onCatogoryClick={this.onCatogoryClick.bind(this)}
-						addToCartCount = {this.state}
-						addToCart = {checkOutCart}
-
-						checkOutCart={this.checkOutCart.bind(this)}
-
-						handleCartCountOnChange={this.handleCartCountOnChange.bind(this)}
-						increaseCount={this.increaseCount.bind(this)}
-						decreaseCount={this.decreaseCount.bind(this)}/> 
+						onQuantityChange={this.onQuantityChange}
+						/> 
           }}/>
         <Route path='/checkout' component={()=>{
-					return <CheckOutPage 
+					return <CheckOutPage
+					linkName={this.state.linkName} 
+					linkOnclick={this.linkOnclick.bind(this)}
 					handleSubmit = {this.handleSubmit}
 					handleOnchange = {this.handleOnchange}
-					removedItem={this.removedItem.bind(this)}
-					checkOutCartState = {this.state.checkOutCart}/>
+					removedItem={this.removedItem.bind(this)}/>
           }}/>       
       </Router>
     </div>

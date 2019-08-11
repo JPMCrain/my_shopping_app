@@ -7,25 +7,18 @@ import Footer from '../../components/Footer/Footer';
 class HomePage extends Component {
 
 	render() {
+
 		return (
 			<div className={styles.Wrapper}>
 				<Header
-					home={this.props.home}
-					shop={this.props.shop}
+					linkName={this.props.linkName}
 					linkOnclick={this.props.linkOnclick}
 				/>
 				<Carousel
 					itemList={this.props.itemState}
 					goToPrevSlide={this.props.goToPrevSlide}
 					goToNextSlide={this.props.goToNextSlide}
-
-					addToCartCount={this.props.addToCartCount}
-					handleCartCountOnChange={this.props.handleCartCountOnChange}
-					addToCart={this.props.addToCart}
-
-					checkOutCart={this.props.checkOutCart}
-					increaseCount={this.props.increaseCount}
-					decreaseCount={this.props.decreaseCount}
+					onQuantityChange={this.props.onQuantityChange}
 				/>
 				<Footer />
 			</div>
