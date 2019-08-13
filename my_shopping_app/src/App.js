@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+
 
 import './App.css'
 import { BrowserRouter as Router, Route } from "react-router-dom"
@@ -206,16 +206,35 @@ class App extends Component {
 		
 	}
 
+	async checkOutCart(name, email, number, address, message){
+			const cart = store.getValue('cart', []);
+			const rawResponse = await fetch('http://localhost:3008/users/order', {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					name: name,
+					email: email,
+					number: number,
+					address: address,
+					message: message,
+					order: cart,
+				})
+			});
+			const content = await rawResponse.json();
+		
+			console.log(content);
+	}
+
   render() {
 	const { 
-		linkName, 
-		cart, 
 		filteredCategory, 
 		filters, 
 		catogoryLists, 
 		openIndex 
 	} = this.state
-	console.log(linkName)
 		if(this.state.loading) {
 			return 'Loading...'
 		} 
@@ -255,8 +274,7 @@ class App extends Component {
 					return <CheckOutPage
 					linkName={this.state.linkName} 
 					linkOnclick={this.linkOnclick.bind(this)}
-					handleSubmit = {this.handleSubmit}
-					handleOnchange = {this.handleOnchange}
+					checkOutCart={this.checkOutCart.bind(this)}
 					removedItem={this.removedItem.bind(this)}/>
           }}/>       
       </Router>

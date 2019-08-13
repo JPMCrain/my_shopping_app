@@ -75,8 +75,7 @@ class CheckOutPage extends Component {
 					</div>
 					<div className={styles.midWrapper__section2}>
 						<CheckOutForm
-							handleOnchange={this.props.handleOnchange}
-							handleSubmit={this.props.handleSubmit}
+							checkOutCart={this.props.checkOutCart}
 							checkOutCartState={cart}
 						/>
 					</div>

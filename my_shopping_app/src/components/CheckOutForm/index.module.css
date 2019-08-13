@@ -2,8 +2,16 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 350px;
-	
+	height: 400px;
+}
+
+.input__wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 500px;
+	height: 500px;
+	overflow: auto;	
 }
 
 .inputfield__wrapper { 
@@ -119,3 +127,23 @@
 	background-color: #86c4b3;
 	border-bottom: 3px solid #18202c;
 }
+
+.inputFlex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+span {
+	color: #86c4b3;
+	font-weight: 500;
+	font-size: 0.8em;
+}
+
+p {
+	
+	color: #86c4b3;
+	font-weight: 500;
+	font-size: 0.8em;
+	margin-top: -35px;
+}
+
