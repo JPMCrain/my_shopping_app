@@ -22,3 +22,15 @@
 	background-color:#86c4b3;
 	color: #18202C;
 }
+
+
+@media only screen 
+  and (max-width: 360px) 
+  and (max-height: 640px) 
+  and (orientation: portrait) {
+		
+		.addBtn {
+			padding: 8px;
+			font-size: 0.7em;
+		}
+	}

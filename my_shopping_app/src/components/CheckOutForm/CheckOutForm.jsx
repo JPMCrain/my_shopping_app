@@ -133,7 +133,7 @@ class CheckOutForm extends Component {
 										onChange={this.handleCheckOutFormChange}
 										noValidate
 									/>
-									{formErrors.name.length > 0 && (<span>{formErrors.name}</span>)}
+									{formErrors.name.length > 0 && (<span className={styles.span}>{formErrors.name}</span>)}
 								</div>
 							</div>
 							<div className={styles.inputfield__wrapper}>
@@ -147,7 +147,7 @@ class CheckOutForm extends Component {
 										onChange={this.handleCheckOutFormChange}
 										noValidate
 									/>
-									{formErrors.email.length > 0 && (<span>{formErrors.email}</span>)}
+									{formErrors.email.length > 0 && (<span className={styles.span}>{formErrors.email}</span>)}
 								</div>
 							</div>
 							<div className={styles.inputfield__wrapper}>
@@ -161,7 +161,7 @@ class CheckOutForm extends Component {
 										name='number'
 										onChange={this.handleCheckOutFormChange}
 									/>
-									{formErrors.number.length > 0 && (<span>{formErrors.number}</span>)}
+									{formErrors.number.length > 0 && (<span className={styles.span}>{formErrors.number}</span>)}
 								</div>
 							</div>
 							<div className={styles.Message__wrapper}>
@@ -175,7 +175,7 @@ class CheckOutForm extends Component {
 										onChange={this.handleCheckOutFormChange}
 										noValidate
 									></textarea>
-									{formErrors.address.length > 0 && (<p>{formErrors.address}</p>)}
+									{formErrors.address.length > 0 && (<p className={styles.p}>{formErrors.address}</p>)}
 								</div>
 							</div>
 							<div className={styles.Message__wrapper}>

@@ -21,10 +21,6 @@ const isUserOrderValid = (user) => {
 };
 
 	async function sendEmailToSiteHolder(user){
-		
-		console.log(user);
-		// let testAccount = await nodemailer.createTestAccount();	
-		
 		let transporter = nodemailer.createTransport({
 			host: "smtp.ethereal.email",
 			port: 587,
@@ -37,9 +33,12 @@ const isUserOrderValid = (user) => {
 
 		function createOrderList(user){
 			const order =	user.order
-			order.map((item) => {
+			console.log(order);
+			const orderHtml = order.map((item) => {
 				return `<p>${item.name}</p>`
-			})
+			}).join("");
+			console.log(orderHtml);
+			return orderHtml;
 		}
 		// send mail with defined transport object
 		let info = await transporter.sendMail({
@@ -73,21 +72,13 @@ const getOrderFilePath = () => {
 
 server.post('/users/order', (req, res) => {
 	const user = req.body;
-	const email = req.body.email;
   if(isUserOrderValid(user)) {
     const users = JSON.parse(fs.readFileSync(orderFilePath));
-		const checkedEmail = users.filter((user)=>{
-			return user.email === email;
-		});
-		if(checkedEmail > 0) {
-			res.send({ success: false, reason: 'Email already used'});
-		} else {
 			sendEmailToSiteHolder(user).catch(console.error);
 			users.push(user);
 			fs.writeFileSync(orderFilePath, JSON.stringify(users));
 			res.send({ success: true });
-		}
-	} else {
+	 } else {
     res.send({ success: false, reason: 'Invaild user'});
   }
 });
