@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import styles from './index.module.css';
 
 class CatogoryList extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			isOpened: false,
-			display: 'none'
-		}
-		this.toggleCatogories = this.toggleCatogories.bind(this)
-	}
-
-
 	onClickFilter(filterKey, index) {
 		let { filters } = this.props;
 		filters[filterKey] = !filters[filterKey];
@@ -19,34 +9,34 @@ class CatogoryList extends Component {
 		this.props.onFilterChange(filters);
 	}
 
-	toggleCatogories() {
-		const { display } = this.state
-		if (display === 'none') {
-			this.setState({
-				isOpened: true,
-				display: 'flex'
-			})
-		} else {
-			this.setState({
-				isOpened: false,
-				display: 'none'
-			})
-		}
-	}
-
 	render() {
-		const { catogoryLists, filters, openIndex } = this.props;
-		const style = {
-			display: this.state.display,
+		const { catogoryLists, filters, openIndex, isButtonNeeded, isCatogoryListOpen } = this.props;
+		const buttonHidden = {
+			display: 'none',
 		}
+		const showButton = {
+			display: 'block',
+		}
+		const catogoryHidden = {
+			display: 'none',
+		}
+		const showCatogory = {
+			display: 'flex',
+		}
+
+		let buttonStyle = !isButtonNeeded ? buttonHidden : showButton;
+		let catogoryListStyle = !filters.isCatogoryListOpen ? catogoryHidden : showCatogory;
+
 		return (
 			<div>
 				<button
+					style={buttonStyle}
 					onClick={() => {
-						this.toggleCatogories()
+						this.onClickFilter('isCatogoryListOpen', undefined)
+						this.props.openCatogoryList()
 					}}
 					className={styles.OpenCatogories}>Open/Close</button>
-				<div className={styles.listWrapper} style={style}>
+				<div className={styles.listWrapper} style={catogoryListStyle}>
 					{
 						catogoryLists.map((catogory, catogoryIndex) => {
 							const catlistItemStyle = openIndex === catogoryIndex ? styles.catlistItemActive : styles.catlistItem

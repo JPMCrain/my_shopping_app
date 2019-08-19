@@ -27,6 +27,10 @@ class ShopPage extends Component {
 							onFilterChange={this.props.onFilterChange}
 							onCatogoryClick={this.props.onCatogoryClick}
 							onCategorytItemClick={this.props.onCategorytItemClick}
+
+
+							isButtonNeeded={this.props.isButtonNeeded}
+							openCatogoryList={this.props.openCatogoryList}
 						/>
 					</div>
 					<div className={styles.itemsWrapper}>

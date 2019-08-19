@@ -31,12 +31,14 @@ class App extends Component {
 				sortByPrice: false,
 				filterByPrice: false,
 				filterByStock: false,
-				isItemViewPannelOpen: false,
+				isItemViewPannelOpen: false,		
+				isCatogoryListOpen: true,
 				itemKey: undefined,
 				min: undefined,
 				max: undefined,
 			},
 			cart: [],
+			isButtonNeeded: undefined,
     }
     
 		this.goToNextSlide = this.goToNextSlide.bind(this);
@@ -46,8 +48,25 @@ class App extends Component {
 
 	componentDidMount() {
 		this.getItems();
+		window.addEventListener("resize", this.resize.bind(this));
+    this.resize();
 	}
 
+resize() {
+    this.setState({
+			isButtonNeeded: window.innerWidth <= 760,
+			filters: {
+				isCatogoryListOpen: false
+			}
+		});
+		if(!this.state.isButtonNeeded){
+			this.setState({
+				filters: {
+					isCatogoryListOpen: true
+				}
+			})
+		}
+}
 	//Home Page
 	getItems() {
 		let itemDataArray = jsonData;
@@ -101,9 +120,7 @@ class App extends Component {
 	
 	//Number Input for Count
 	onQuantityChange(quantity, index) {
-		const { currentItems, linkName } = this.state;
-		console.log(currentItems)
-		console.log(linkName)
+		const { currentItems } = this.state;
 		let currentItem = currentItems[index]
 		currentItem.count = quantity;
 		this.setState({currentItems})
@@ -228,16 +245,24 @@ class App extends Component {
 			console.log(content);
 	}
 
+	openCatogoryList(){
+		if(this.state.isCatogoryListOpen){
+			this.setState({ isCatogoryListOpen: false })
+		}
+		this.setState({ isCatogoryListOpen: true })
+	}
+
   render() {
 	const { 
 		filteredCategory, 
 		filters, 
 		catogoryLists, 
-		openIndex 
-	} = this.state
+		openIndex
+	} = this.state;
 		if(this.state.loading) {
 			return 'Loading...'
 		} 
+	
 		return (
       <div className="App">
       <Router>
@@ -268,6 +293,8 @@ class App extends Component {
 						onCategorytItemClick={this.onCategorytItemClick.bind(this)}
 						onCatogoryClick={this.onCatogoryClick.bind(this)}
 						onQuantityChange={this.onQuantityChange}
+						openCatogoryList={this.openCatogoryList.bind(this)}
+						isButtonNeeded={this.state.isButtonNeeded}
 						/> 
           }}/>
         <Route path='/checkout' component={()=>{

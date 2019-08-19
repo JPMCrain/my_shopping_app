@@ -1,4 +1,6 @@
 .listWrapper {
+	display: flex;
+	flex-direction: column;
 	width: 250px;
 	color: #e8d19d;
 }
