@@ -3,16 +3,6 @@
 	color: #e8d19d;
 }
 
-ul {
-	padding: 0;
-	padding-left: 10px;
-}
-
-li {
-	cursor: pointer;
-	list-style-type: none;
-}
-
 .catlistItem {
 	font-weight: 700;
 	font-family:  sans-serif;
@@ -65,3 +55,36 @@ li {
 	background-color:#782644;
 	color:  snow;
 }
+
+/* Portrait */
+@media only screen 
+  and (max-width: 360px) 
+  and (max-height: 640px) 
+	and (orientation: portrait) {
+		.listWrapper {
+			display: flex;
+			width: 360px;
+		}
+		
+		.catlistItem {
+			font-size: 0.8em;
+			border-radius: 20px;
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+		
+		
+		.catlistItemActive {
+			font-size: 0.8em;
+			border-radius: 20px;
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+		
+		.sublistItem {
+			font-size: 0.6em;
+			border-radius: 20px;
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+	}
