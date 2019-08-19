@@ -11,14 +11,16 @@ import ShopListHeader from '../../components/ShopListHeader/ShopListHeader';
 class ShopPage extends Component {
 	render() {
 
-		const { filteredCategory, filters, catogoryLists, openIndex, openCatogoryList } = this.props;
+		const { filteredCategory, filters, catogoryLists, openIndex, openSubIndex, openCatogoryList } = this.props;
 
 		const openCatogoryListSyle = {
 			height: '100%'
 		};
 
 		const closeCatogoryListSyle = {
-			height: '20px'
+			height: '50px',
+			display: 'flex',
+			justifyContent: 'flex-end',
 		};
 
 		let listWrapperStyle = filters.isCatogoryListOpen ? openCatogoryListSyle : closeCatogoryListSyle;
@@ -36,6 +38,7 @@ class ShopPage extends Component {
 							filters={filters}
 							catogoryLists={catogoryLists}
 							openIndex={openIndex}
+							openSubIndex={openSubIndex}
 							onFilterChange={this.props.onFilterChange}
 							onCatogoryClick={this.props.onCatogoryClick}
 							onCategorytItemClick={this.props.onCategorytItemClick}

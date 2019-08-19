@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styles from './index.module.css';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faListUl } from '@fortawesome/free-solid-svg-icons';
+
+
 class CatogoryList extends Component {
 	onClickFilter(filterKey, index) {
 		let { filters } = this.props;
@@ -10,7 +14,7 @@ class CatogoryList extends Component {
 	}
 
 	render() {
-		const { catogoryLists, filters, openIndex, isButtonNeeded } = this.props;
+		const { catogoryLists, filters, openIndex, isButtonNeeded, openSubIndex } = this.props;
 		const buttonHidden = {
 			display: 'none',
 		}
@@ -26,17 +30,23 @@ class CatogoryList extends Component {
 
 		let buttonStyle = !isButtonNeeded ? buttonHidden : showButton;
 		let catogoryListStyle = !filters.isCatogoryListOpen ? catogoryHidden : showCatogory;
+		let buttonColorStyle = !filters.isCatogoryListOpen ? styles.openCatogories : styles.closedCatogories;
 
 		return (
 			<div>
-				<button
-					style={buttonStyle}
-					onClick={() => {
-						this.onClickFilter('isCatogoryListOpen', undefined)
-						this.props.openCatogoryList()
-					}}
-					className={styles.OpenCatogories}>Open/Close</button>
-				<div className={styles.listWrapper} style={catogoryListStyle}>
+				<div className={styles.Wrapper}>
+					<button
+						style={buttonStyle}
+						onClick={() => {
+							this.onClickFilter('isCatogoryListOpen', undefined)
+							this.props.openCatogoryList()
+						}}
+						className={buttonColorStyle}>
+						<FontAwesomeIcon icon={faListUl} />
+					</button>
+				</div>
+
+				<div className={styles.listWrapper} style={!isButtonNeeded ? showCatogory : catogoryListStyle}>
 					{
 						catogoryLists.map((catogory, catogoryIndex) => {
 							const catlistItemStyle = openIndex === catogoryIndex ? styles.catlistItemActive : styles.catlistItem
@@ -55,18 +65,17 @@ class CatogoryList extends Component {
 										<div>
 											{
 												catogory.subcategories.map((item, index) => {
-
+													const sublistItemStyle = openSubIndex === index ? styles.sublistItemActive : styles.sublistItem
 													return (
-														<div>
+														<div key={index}>
 															<button
-																className={styles.sublistItem}
+																className={sublistItemStyle}
 																key={index}
 																onClick={(e) => {
 																	if (filters.isItemViewPannelOpen) {
 																		this.onClickFilter('isItemViewPannelOpen', undefined)
 																		this.props.onCategorytItemClick(catogoryIndex, index)
 																	} else {
-
 																		this.onClickFilter('isCatogoryListOpen', undefined)
 																		this.props.onCategorytItemClick(catogoryIndex, index)
 																	}

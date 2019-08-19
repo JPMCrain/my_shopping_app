@@ -37,7 +37,7 @@ class AddShopListCards extends Component {
 	}
 
 	render() {
-		const { category, filters } = this.props;
+		const { category, filters, isButtonNeeded } = this.props;
 		let showStyle = {
 			display: 'flex'
 		}
@@ -49,7 +49,7 @@ class AddShopListCards extends Component {
 		const showOrHideItems = !filters.isCatogoryListOpen ? showStyle : hideStyle
 
 		return (
-			<div style={showOrHideItems}>
+			<div style={isButtonNeeded ? showOrHideItems : showStyle}>
 				{
 					category && category.items &&
 					<div className={styles.Wrapper}>

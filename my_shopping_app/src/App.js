@@ -19,6 +19,7 @@ class App extends Component {
 			currentItems: [],
 			catogoryLists: jsonData,
 			openIndex: null,
+			openSubIndex: null,
 			linkName : 'home',
 			itemList: [],
 			homeSliderList: [],
@@ -149,6 +150,7 @@ resize() {
 		const filteredCategory = this.filterCategoryItems(selectedCategory, filters);
 		this.setState({ selectedCategory, 
 										filteredCategory, 
+										openSubIndex: index, 
 										currentItems: filteredCategory.items  });
 	}
 
@@ -257,7 +259,8 @@ resize() {
 		filteredCategory, 
 		filters, 
 		catogoryLists, 
-		openIndex
+		openIndex,
+		openSubIndex
 	} = this.state;
 		if(this.state.loading) {
 			return 'Loading...'
@@ -287,6 +290,7 @@ resize() {
 						catogoryLists={catogoryLists}
 						filters={filters}
 						openIndex={openIndex}
+						openSubIndex={openSubIndex}
 						index={this.props.index}
 						item={this.props.item}
 						onFilterChange={this.onFilterChange.bind(this)}
