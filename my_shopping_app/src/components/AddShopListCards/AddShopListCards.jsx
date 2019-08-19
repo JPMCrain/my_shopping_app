@@ -38,8 +38,18 @@ class AddShopListCards extends Component {
 
 	render() {
 		const { category, filters } = this.props;
+		let showStyle = {
+			display: 'flex'
+		}
+
+		let hideStyle = {
+			display: 'none'
+		}
+
+		const showOrHideItems = !filters.isCatogoryListOpen ? showStyle : hideStyle
+
 		return (
-			<div>
+			<div style={showOrHideItems}>
 				{
 					category && category.items &&
 					<div className={styles.Wrapper}>

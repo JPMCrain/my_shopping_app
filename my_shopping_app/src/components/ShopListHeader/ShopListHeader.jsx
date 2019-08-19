@@ -23,9 +23,18 @@ class SortButtonsTab extends Component {
 
 	render() {
 		const { title, filters } = this.props;
+		let showStyle = {
+			display: 'flex'
+		}
+
+		let hideStyle = {
+			display: 'none'
+		}
+
+		const showOrHideItems = !filters.isCatogoryListOpen ? showStyle : hideStyle
 		return (
 
-			<div>
+			<div style={showOrHideItems}>
 				{title &&
 					<div className={styles.cardsTopBar} >
 						<h4>{title}</h4>

@@ -10,7 +10,7 @@ class CatogoryList extends Component {
 	}
 
 	render() {
-		const { catogoryLists, filters, openIndex, isButtonNeeded, isCatogoryListOpen } = this.props;
+		const { catogoryLists, filters, openIndex, isButtonNeeded } = this.props;
 		const buttonHidden = {
 			display: 'none',
 		}
@@ -66,6 +66,8 @@ class CatogoryList extends Component {
 																		this.onClickFilter('isItemViewPannelOpen', undefined)
 																		this.props.onCategorytItemClick(catogoryIndex, index)
 																	} else {
+
+																		this.onClickFilter('isCatogoryListOpen', undefined)
 																		this.props.onCategorytItemClick(catogoryIndex, index)
 																	}
 																}}>

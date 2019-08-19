@@ -11,7 +11,17 @@ import ShopListHeader from '../../components/ShopListHeader/ShopListHeader';
 class ShopPage extends Component {
 	render() {
 
-		const { filteredCategory, filters, catogoryLists, openIndex } = this.props;
+		const { filteredCategory, filters, catogoryLists, openIndex, openCatogoryList } = this.props;
+
+		const openCatogoryListSyle = {
+			height: '100%'
+		};
+
+		const closeCatogoryListSyle = {
+			height: '20px'
+		};
+
+		let listWrapperStyle = filters.isCatogoryListOpen ? openCatogoryListSyle : closeCatogoryListSyle;
 
 		return (
 			<div className={styles.Wrapper}>
@@ -19,7 +29,9 @@ class ShopPage extends Component {
 					linkName={this.props.linkName}
 					linkOnclick={this.props.linkOnclick} />
 				<div className={styles.midWrapper}>
-					<div className={styles.listWrapper}>
+					<div
+						className={styles.listWrapper}
+						style={listWrapperStyle}>
 						<CatogoryList
 							filters={filters}
 							catogoryLists={catogoryLists}
@@ -30,7 +42,7 @@ class ShopPage extends Component {
 
 
 							isButtonNeeded={this.props.isButtonNeeded}
-							openCatogoryList={this.props.openCatogoryList}
+							openCatogoryList={openCatogoryList}
 						/>
 					</div>
 					<div className={styles.itemsWrapper}>
