@@ -37,7 +37,7 @@ class SortButtonsTab extends Component {
 			<div style={isButtonNeeded ? showOrHideItems : showStyle}>
 				{title &&
 					<div className={styles.cardsTopBar} >
-						<h4>{title}</h4>
+						<h4 className={styles.header}>{title}</h4>
 						<div className={styles.sortButtonsWrapper}>
 							<p className={styles.inputLabel}>min&#58;</p>
 							<input
@@ -60,13 +60,13 @@ class SortButtonsTab extends Component {
 							<button
 								onClick={this.onClickFilter.bind(this, "filterByPrice")}
 								className={this.getFilterClassName(filters.filterByPrice)}>
-								Filter by price
+								Filter Price
 							</button>
 
 							<button
 								onClick={this.onClickFilter.bind(this, "sortByPrice")}
 								className={this.getFilterClassName(filters.sortByPrice)}>
-								Sort by price
+								Sort Price
 							</button>
 
 							<button

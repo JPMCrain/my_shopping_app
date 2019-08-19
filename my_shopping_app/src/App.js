@@ -139,6 +139,7 @@ resize() {
 
 		this.setState({
 										openIndex: index, 
+										openSubIndex: null, 
 										selectedCategory: newSelectedCategory,
 										filteredCategory: newSelectedCategory
 									});
@@ -249,9 +250,13 @@ resize() {
 
 	openCatogoryList(){
 		if(this.state.isCatogoryListOpen){
-			this.setState({ isCatogoryListOpen: false })
+			this.setState({ 
+				isCatogoryListOpen: false 
+			})
 		}
-		this.setState({ isCatogoryListOpen: true })
+		this.setState({  
+			isCatogoryListOpen: true 
+		})
 	}
 
   render() {
