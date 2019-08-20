@@ -51,11 +51,10 @@
 	margin-left: 10px;
 	font-weight: 700;
 	font-size: 0.9em;
-	border: 2px solid #e8d19d;
 	border-radius: 20px;
 	padding: 10px;
 	color: #e8d19d;
-	background-color: #18202c;
+	background-color:#782644;
 }
 
 .sublistItemActive {
@@ -65,11 +64,11 @@
 	margin-left: 15px;
 	font-weight: 700;
 	font-size: 0.9em;
-	border: 2px solid #e8d19d;
+	border: 2px solid #18202c;
 	border-radius: 20px;
 	padding: 10px;
-	color: #18202c;
-	background-color: #e8d19d;
+	color: #e8d19d;
+	background-color:#782644;
 }
 
 .sublistItem:hover  {

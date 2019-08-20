@@ -14,7 +14,6 @@
 	width: 600px;
 	justify-content: flex-end;
 	align-items: center;
-	margin-right: 10px;
 }
 
 
@@ -22,7 +21,7 @@
 	width: 50px;
 	padding-left: 10px; 
 	align-self: flex-end;
-	margin-bottom: 15px;
+	margin-bottom: 30px;
 	border: none;
 	outline: none;
 	border-bottom: 1px solid #782644;
@@ -63,6 +62,17 @@
 	color: #18202C;
 }
 
+.filterByPriceWrapper {
+	display: flex;
+	flex-direction: row-reverse;
+	height: 50px;
+	justify-content: center;
+	align-items: center;
+}
+
+.inputs__wrapper {
+	display: flex;
+}
 
 @media only screen 
   and (max-width: 360px) 
@@ -74,7 +84,7 @@
 			align-items: center;
 			padding-left: 10px;
 			line-height: 0px;
-			height: 80px;
+			height: 100px;
 			width: 360px;
 			border-bottom: 2px dashed #782644;
 		}
@@ -86,8 +96,19 @@
 
 		.sortButtonsWrapper {
 			display: flex;
+			
+			justify-content: space-between;
+			height: 60px;
 			width: 360px;
+			margin-right: 20px;
 		}
+
+		.filterByPriceWrapper {
+			height: 60px;	
+			flex-direction: column;
+			
+		}
+
 
 		.input {
 			width: 30px;

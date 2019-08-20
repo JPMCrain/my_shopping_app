@@ -31,6 +31,7 @@ class App extends Component {
 			filters: {
 				sortByPrice: false,
 				filterByPrice: false,
+				isFilterByPrice: false,
 				filterByStock: false,
 				isItemViewPannelOpen: false,		
 				isCatogoryListOpen: true,

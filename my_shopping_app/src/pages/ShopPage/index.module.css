@@ -30,6 +30,7 @@
 		
 		.Wrapper {
 			display: flex;
+			width: 360px;
 			height: 700px;
 		}
 

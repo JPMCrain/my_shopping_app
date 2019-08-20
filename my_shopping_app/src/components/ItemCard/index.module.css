@@ -59,3 +59,47 @@ h4 {
 	font-size: 1.2em;
 	justify-self: flex-start;
 }
+
+/* Portrait */
+@media only screen 
+  and (max-width: 360px) 
+  and (max-height: 640px) 
+	and (orientation: portrait) {
+		.itemWrapper {
+			width: 200px;
+			height: 300px;
+		}
+		
+		.itemImage {
+			width: 200px;
+			height: 150px;
+		}
+		
+		.itemName {
+			font-size: 1.4em;
+		}
+		
+		
+		.AddToCartWrapper {
+			width: 200px;
+			display: flex;
+			justify-content: space-evenly;
+			align-content: center;
+		}
+		
+		.itemQuantity {
+			width: 75px;
+		}
+		
+		.itemAddToCart {
+			align-self: flex-end;
+			font-size: 1em;
+		}
+		
+		.itemPrice {
+			width: 90%;
+			color: #782644;
+			font-size: 1.2em;
+			justify-self: flex-start;
+		}
+	}
