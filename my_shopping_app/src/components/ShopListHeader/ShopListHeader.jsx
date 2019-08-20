@@ -46,7 +46,7 @@ class SortButtonsTab extends Component {
 		const showOrHideInput = !filters.isFilterByPrice ? hideStyle : showStyle
 		return (
 
-			<div style={isButtonNeeded ? showOrHideItems : showStyle}>
+			<div style={isButtonNeeded ? showStyle : showOrHideItems}>
 				{title &&
 					<div className={styles.cardsTopBar} >
 						<h4 className={styles.header}>{title}</h4>

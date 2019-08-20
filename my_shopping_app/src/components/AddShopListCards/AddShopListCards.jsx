@@ -46,10 +46,10 @@ class AddShopListCards extends Component {
 			display: 'none'
 		}
 
-		const showOrHideItems = !filters.isCatogoryListOpen ? hideStyle : showStyle
+		const showOrHideItems = !filters.isCatogoryListOpen ? showStyle : hideStyle
 
 		return (
-			<div style={isButtonNeeded ? showOrHideItems : showStyle}>
+			<div style={isButtonNeeded ? showStyle : showOrHideItems}>
 				{
 					category && category.items &&
 					<div className={styles.Wrapper}>
