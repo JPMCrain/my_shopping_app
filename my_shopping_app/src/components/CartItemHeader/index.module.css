@@ -26,3 +26,22 @@
 	align-items: center;
 	width: 70px;
 }
+
+/* Portrait */
+@media only screen 
+  and (max-width: 360px) 
+  and (max-height: 640px) 
+	and (orientation: portrait) {
+		.cartItem__wrapper {
+			width: 340px;
+			justify-content: center;
+			font-weight: 600;
+			font-size: 1em;
+		}
+		
+		.cartCellTitle__wrapper {
+			padding-right: 10px;
+			justify-content: flex-end;
+			width: 100px;
+		}
+	}

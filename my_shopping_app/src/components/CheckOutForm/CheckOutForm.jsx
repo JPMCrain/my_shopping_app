@@ -123,7 +123,7 @@ class CheckOutForm extends Component {
 					<div className={styles.form__wrapper}>
 						<div className={styles.input__wrapper}>
 							<div className={styles.inputfield__wrapper}>
-								<h4>Full Name</h4>
+								<h4 className={styles.title}> Full Name</h4>
 								<div className={styles.inputFlex}>
 									<input
 										className={styles.input}
@@ -137,7 +137,7 @@ class CheckOutForm extends Component {
 								</div>
 							</div>
 							<div className={styles.inputfield__wrapper}>
-								<h4>Email</h4>
+								<h4 className={styles.title}>Email</h4>
 								<div className={styles.inputFlex}>
 									<input
 										className={styles.input}
@@ -151,7 +151,7 @@ class CheckOutForm extends Component {
 								</div>
 							</div>
 							<div className={styles.inputfield__wrapper}>
-								<h4>Cell</h4>
+								<h4 className={styles.title}>Cell</h4>
 								<div className={styles.inputFlex}>
 									<input
 										className={styles.input}
@@ -165,7 +165,7 @@ class CheckOutForm extends Component {
 								</div>
 							</div>
 							<div className={styles.Message__wrapper}>
-								<h4>Address</h4>
+								<h4 className={styles.title}>Address</h4>
 								<div className={styles.inputFlex}>
 									<textarea
 										className={styles.message}
@@ -179,7 +179,7 @@ class CheckOutForm extends Component {
 								</div>
 							</div>
 							<div className={styles.Message__wrapper}>
-								<h4>Message</h4>
+								<h4 className={styles.title}>Message</h4>
 								<textarea
 									className={styles.message}
 									ref={el => this.messageInput = el}

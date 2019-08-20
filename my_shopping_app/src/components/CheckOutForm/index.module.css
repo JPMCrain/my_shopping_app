@@ -16,18 +16,22 @@
 .input__wrapper::-webkit-scrollbar-track
 {
     box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
+		background-color:  #18202c;
+		border-radius: 10px;
 }
 
 .input__wrapper::-webkit-scrollbar
 {
-    width: 6px;
-    background-color: #F5F5F5;
+		width: 8px;
+		border-radius: 10px;
+		background-color: #86c4b3;
 }
 
 .input__wrapper::-webkit-scrollbar-thumb
 {
-    background-color: #000000;
+	
+		border-radius: 10px;
+		background-color: #86c4b3;
 }
 
 .inputfield__wrapper { 
@@ -160,6 +164,60 @@
 	color: #86c4b3;
 	font-weight: 500;
 	font-size: 0.8em;
+	margin: 0;
 	margin-top: -35px;
 }
 
+/* Portrait */
+@media only screen 
+  and (max-width: 360px) 
+  and (max-height: 640px) 
+	and (orientation: portrait) {
+		.form__wrapper {
+			width: 360px;
+			height: 540px;
+		}
+		
+		.input__wrapper {
+			flex-direction: column;
+			align-items: center;
+			width: 360px;
+			overflow: auto;
+		}
+		
+		.inputfield__wrapper { 
+			width: 340px;
+			flex-direction: column;
+			align-items: center;
+		}
+		
+		
+		.Message__wrapper {
+			width: 360px;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			line-height: 100px;
+		}
+		
+		.title {
+			margin: 0;
+			padding: 0;
+			text-align: left;	
+			width: 310px;
+			height: 40px;
+			line-height: 40px;
+		}
+		
+		.button__wrapper {
+			display: flex;
+			margin-top: -17px;
+			background-color: #782644;
+			z-index: 3;
+			justify-content: center;
+			align-items: center;
+			width: 360px;
+			height: 100px;
+		}
+		
+	}

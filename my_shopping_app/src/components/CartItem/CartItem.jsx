@@ -8,9 +8,12 @@ class CartItem extends Component {
 	render() {
 		return (
 			<div className={styles.cartItem__wrapper}>
-				<div>
-					<img className={styles.cartImage} src={this.props.image} alt={this.props.name} />
-				</div>
+				{
+					!this.props.isButtonNeeded &&
+					<div>
+						<img className={styles.cartImage} src={this.props.image} alt={this.props.name} />
+					</div>
+				}
 				<div className={styles.cartCellTitle__wrapper}>
 					<p>{this.props.name}</p>
 				</div>

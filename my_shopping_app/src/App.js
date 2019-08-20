@@ -312,7 +312,8 @@ resize() {
 					linkName={this.state.linkName} 
 					linkOnclick={this.linkOnclick.bind(this)}
 					checkOutCart={this.checkOutCart.bind(this)}
-					removedItem={this.removedItem.bind(this)}/>
+					removedItem={this.removedItem.bind(this)}
+					isButtonNeeded={this.state.isButtonNeeded}/>
           }}/>       
       </Router>
     </div>

@@ -5,10 +5,13 @@ class CartItemHeader extends Component {
 	render() {
 		return (
 			<div className={styles.cartItem__wrapper}>
-				<div className={styles.cartCellImage__wrapper}>
-				</div>
+				{
+					!this.props.isButtonNeeded &&
+					<div className={styles.cartCellImage__wrapper}>
+					</div>
+				}
 				<div className={styles.cartCellTitle__wrapper}>
-					<p>{this.props.name}</p>
+					<p>Product</p>
 				</div>
 				<div className={styles.cartCellNumber__wrapper}>
 					<p>{this.props.price}</p>

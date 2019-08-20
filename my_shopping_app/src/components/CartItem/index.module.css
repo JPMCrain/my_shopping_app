@@ -53,3 +53,46 @@
 .removeItem:hover {
 	color: #c74072;
 }
+
+/* Portrait */
+@media only screen 
+  and (max-width: 360px) 
+  and (max-height: 640px) 
+	and (orientation: portrait) {
+		.cartItem__wrapper {
+			
+			font-size: 0.8em;
+			width: 334px;
+			height: 50px;
+			margin-top: 0;
+			border: 1px solid #782644;
+		}
+		
+		.cartCellTitle__wrapper {
+			font-size: 0.8em;
+			font-weight: 500;
+			overflow-wrap: break-word;
+			word-wrap: break-word;
+			width: 115px;
+		
+		}
+		.cartCellNumber__wrapper {
+			display: flex;
+			justify-content: center;
+			align-self: center;
+			width: 70px;
+		}
+
+		.removeItem__wrapper{
+			height: 50px;
+			align-items: center;
+		}
+
+		.removeItem {
+			border: none;
+			outline: none;
+			font-size: 1.2em;
+			background-color:  #e8d19d;
+			color: #782644;
+		}
+	}

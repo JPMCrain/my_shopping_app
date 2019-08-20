@@ -37,6 +37,7 @@ class CheckOutPage extends Component {
 
 	render() {
 		const cart = store.getValue('cart', []);
+		const { isButtonNeeded } = this.props
 		return (
 			<div className={styles.Wrapper}>
 				<Header
@@ -47,6 +48,7 @@ class CheckOutPage extends Component {
 					<div className={styles.midWrapper__section1}>
 						<div className={styles.cart__Wrapper}>
 							<CartItemHeader
+								isButtonNeeded={isButtonNeeded}
 								name="Product Name"
 								price="Price"
 								count="Count"
@@ -56,6 +58,7 @@ class CheckOutPage extends Component {
 								cart.map((item, itemIndex) => {
 									return (
 										<CartItem
+											isButtonNeeded={isButtonNeeded}
 											key={itemIndex}
 											name={item.name}
 											price={item.price}
@@ -69,9 +72,12 @@ class CheckOutPage extends Component {
 								})
 							}
 						</div>
-						<div className={styles.totalOfAllItems}>
-							Total Sum:	$	{this.totalOfAllItems()}
+						<div className={styles.total__wrapper}>
+							<div className={styles.totalOfAllItems}>
+								Total Sum:	$	{this.totalOfAllItems()}
+							</div>
 						</div>
+
 					</div>
 					<div className={styles.midWrapper__section2}>
 						<CheckOutForm
